@@ -19,8 +19,8 @@ Pour garantir une expérience utilisateur optimale, le projet est conçu en adop
 
 Les personnes qui travaillent sur ce projet sont les suivantes :
 - [Thomas Spinec](https://github.com/thomas-spinec)
-- [Ye Guangquan](https://github.com/guangquan-ye)
-- [Jérémy Nowak](https://github.com/jeremynowak)
+- [Guangquan Ye](https://github.com/guangquan-ye)
+- [Jérémy Nowak](https://github.com/jeremy-nowak)
 
 ## 💾 Sauvegarde des Données
 
