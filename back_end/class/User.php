@@ -1,30 +1,32 @@
 <?php
 class User extends Database{
     
-    private $user_name;
-    private $user_email;
+    private $login;
 
     public function __construct(){
 
         parent::__construct();
+
+        if(isset($_SESSION["login"])){
+            $this->setUserName($_SESSION["login"]);
+        }
+        else{
+            $this->setUserName("");
+        }
+
+        
     }
 
 // ------------------------------------Getter and Setter start----------------------------------
     public function getUserName(){
-        return $this->user_name;
-    }
-    public function getUserEmail(){
-        return $this->user_email;
+        return $this->login;
     }
 
 
 
-    public function setUserName($user_name){
-        $this->user_name = $user_name;
-    }
 
-    public function setUserEmail($user_email){
-        $this->user_email = $user_email;
+    public function setUserName($login){
+        $this->login = $login;
     }
 
 
@@ -46,15 +48,26 @@ class User extends Database{
     }
 
     
-    public function connection(){
-        $sql = "SELECT * FROM `users` WHERE `login` = :login AND `password` = :password";
-        $prepare = $this->bdd->prepare($sql);
-        $prepare->execute([':login' => $this->user_name, ':password' => $this->user_email]);
-        $result = $prepare->fetch(PDO::FETCH_ASSOC);
-        
+    public function connection($login, $password){
+        $sql = "SELECT * FROM `users` WHERE `login` = :login";
+        $select = $this->bdd->prepare($sql);
+        $select->execute([':login' => $login]);
+        $result = $select->fetch(PDO::FETCH_ASSOC);
+    
         if($result){
-            echo "connectionOK";
-            return "connectionOK";
+            if(password_verify($password, $result["password"])){
+                
+                $_SESSION["login"] = $login;
+                $this->setUserName($login);
+
+                echo $login;
+                return "connectionOK";
+            }
+            else{
+                echo "connectionKO";
+                return "connectionKO";
+            }
+
         }
         else{
             echo "connectionKO";
@@ -65,9 +78,9 @@ class User extends Database{
     
     public function login_verify(){
             
-            $sql = "SELECT * FROM `users` WHERE `login` = :login AND `password` = :password";
+            $sql = "SELECT * FROM `users` WHERE `login` = :login";
             $prepare = $this->bdd->prepare($sql);
-            $prepare->execute([':login' => $this->user_name, ':password' => $this->user_email]);
+            $prepare->execute([':login' => $this->login]);
             $result = $prepare->fetch(PDO::FETCH_ASSOC);
     
             if($result){
