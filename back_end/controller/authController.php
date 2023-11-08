@@ -3,42 +3,50 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
+require_once("../class/User.php");
+$user = new User();
 
-// session_start();
+session_start();
 //    __________________________________________________
 //    Connexion
 if (isset($_POST["connection"])) {
 
     if (isset($_POST["login"]) && isset($_POST["password"])) {
-        require_once("../class/User.php");
 
         $login = htmlspecialchars($_POST["login"]);
         $password = htmlspecialchars($_POST["password"]);
 
-        $user = new User();
         $user->connection($login, $password);
     } else {
-        echo "connectionKO";
+        echo "Veuillez remplir tous les champs";
     }
 }
 
 if (isset($_POST["register"])) {
 
-    var_dump($_POST);
+    if ($_POST["register"] == "register") {
+        if (isset($_POST["login"]) && isset($_POST["password"]) && isset($_POST["confirmation"])) {
 
-    // echo $_POST["login"];
-    // echo $_POST["password"];
-    // echo $_POST["confirmation"];
+            $login = htmlspecialchars($_POST["login"]);
+            $password = htmlspecialchars($_POST["password"]);
+            $confirmation = htmlspecialchars($_POST["confirmation"]);
 
-    // if (isset($_POST["login"]) && isset($_POST["password"])) {
-    //     require_once("../class/User.php");
+            $user->register($login, $password, $confirmation);
+        } else {
+            echo "Veuillez remplir tous les champs";
+        }
+    } else if ($_POST["register"] == "login") {
+        if ($_POST["login"] != "") {
 
-    //     $login = htmlspecialchars($_POST["login"]);
-    //     $password = htmlspecialchars($_POST["password"]);
+            $login = htmlspecialchars($_POST["login"]);
 
-    //     $user = new User();
-    //     $user->register($login, $password);
-    // } else {
-    //     echo "registerKO";
-    // }
+            if ($user->login_verify($login)) {
+                echo "Ce login est déjà utilisé";
+            } else {
+                echo "ok";
+            }
+        } else {
+            echo "Champ vide";
+        }
+    }
 }

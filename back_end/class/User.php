@@ -1,31 +1,34 @@
 <?php
-class User extends Database{
-    
+
+require_once("Database.php");
+class User extends Database
+{
+
     private $login;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         parent::__construct();
 
-        if(isset($_SESSION["login"])){
+        if (isset($_SESSION["login"])) {
             $this->setUserName($_SESSION["login"]);
-        }
-        else{
+        } else {
             $this->setUserName("");
         }
-
-        
     }
 
-// ------------------------------------Getter and Setter start----------------------------------
-    public function getUserName(){
+    // ------------------------------------Getter and Setter start----------------------------------
+    public function getUserName()
+    {
         return $this->login;
     }
 
 
 
 
-    public function setUserName($login){
+    public function setUserName($login)
+    {
         $this->login = $login;
     }
 
@@ -34,68 +37,65 @@ class User extends Database{
     // ------------------------------------Getter and Setter end----------------------------------
 
 
-
-
-    public function register($login, $password){
-
-        $sql = "INSERT INTO `users`(`login`, `password`) VALUES (:login, :password)";
-        $prepare = $this->bdd->prepare($sql);
-        $prepare->execute([':login' => $login, ':password' => $password]);
-
-        
-        echo "registerOK";
-        return "registerOK";
+    public function register($login, $password, $confirmation)
+    {
+        if (!$this->login_verify($login)) {
+            if ($password == $confirmation) {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO `users`(`login`, `password`) VALUES (:login, :password)";
+                $prepare = $this->bdd->prepare($sql);
+                $prepare->execute([
+                    ':login' => $login,
+                    ':password' => $password
+                ]);
+                $_SESSION["login"] = $login;
+                $this->setUserName($login);
+                echo $login;
+                return "registerOK";
+            } else {
+                echo "Les deux mots de passe ne correspondent pas";
+                return "Les deux mots de passe ne correspondent pas";
+            }
+        } else {
+            echo "Ce login est déjà utilisé";
+            return "Ce login est déjà utilisé";
+        }
     }
 
-    
-    public function connection($login, $password){
-        $sql = "SELECT * FROM `users` WHERE `login` = :login";
-        $select = $this->bdd->prepare($sql);
-        $select->execute([':login' => $login]);
-        $result = $select->fetch(PDO::FETCH_ASSOC);
-    
-        if($result){
-            if(password_verify($password, $result["password"])){
-                
+
+    public function connection($login, $password)
+    {
+        if ($result = $this->login_verify($login)) {
+            if (password_verify($password, $result["password"])) {
+
                 $_SESSION["login"] = $login;
                 $this->setUserName($login);
 
                 echo $login;
                 return "connectionOK";
+            } else {
+                echo "Les informations de connexion sont incorrectes";
+                return "Les informations de connexion sont incorrectes";
             }
-            else{
-                echo "connectionKO";
-                return "connectionKO";
-            }
-
-        }
-        else{
-            echo "connectionKO";
-            return "connectionKO";
+        } else {
+            echo "Les informations de connexion sont incorrectes";
+            return "Les informations de connexion sont incorrectes";
         }
     }
 
-    
-    public function login_verify(){
-            
-            $sql = "SELECT * FROM `users` WHERE `login` = :login";
-            $prepare = $this->bdd->prepare($sql);
-            $prepare->execute([':login' => $this->login]);
-            $result = $prepare->fetch(PDO::FETCH_ASSOC);
-    
-            if($result){
-                echo "loginOK";
-                return "loginOK";
-            }
-            else{
-                echo "loginKO";
-                return "loginKO";
-            }
+
+    public function login_verify($login)
+    {
+
+        $sql = "SELECT * FROM `users` WHERE `login` = :login";
+        $prepare = $this->bdd->prepare($sql);
+        $prepare->execute([':login' => $login]);
+        $result = $prepare->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
     }
-    
-    
-    
 }
-
-
-?>

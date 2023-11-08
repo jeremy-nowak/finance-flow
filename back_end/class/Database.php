@@ -10,12 +10,8 @@ abstract class Database
             $this->bdd = new PDO('mysql:host=localhost;dbname=finance_flow;charset=utf8', 'root', '');
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Connexion échouée : ' . $e->getMessage();
         }
     }
 }
-
-
-?>
