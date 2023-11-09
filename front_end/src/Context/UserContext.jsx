@@ -20,8 +20,7 @@ const UserProvider = ({ children }) => {
         body: data,
       });
       const res = await response.json();
-      console.log("res", res);
-      if (res.status === "success") {
+      if (res) {
         setData(res);
       }
     } catch (err) {
@@ -35,16 +34,7 @@ const UserProvider = ({ children }) => {
     } else {
       setData({});
     }
-    console.log("User", user);
   }, [user]);
-
-  useEffect(() => {
-    console.log("Data!!", data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log("Connected", connected);
-  }, [connected]);
 
   // si l'utilisateur est en localstorage, on le connecte automatiquement
   useEffect(() => {
