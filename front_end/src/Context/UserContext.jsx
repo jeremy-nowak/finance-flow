@@ -22,7 +22,7 @@ const UserProvider = ({ children }) => {
       const res = await response.json();
       console.log("res", res);
       if (res.status === "success") {
-        setData(res.data);
+        setData(res);
       }
     } catch (err) {
       console.log(err);
