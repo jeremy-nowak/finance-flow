@@ -10,7 +10,6 @@ import HomeScreen from "./screens/HomeScreen";
 
 function App() {
   const { setUser, setConnected, connected } = useContext(UserContext);
-  console.log("connected", connected);
 
   return (
     <>
