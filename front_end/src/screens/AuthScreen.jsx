@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import { PATH } from "../../config";
+import { useState, useContext } from "react";
+import { UserContext } from "../Context/UserContext";
 
 export default function AuthScreen() {
   // ________________________
@@ -20,6 +20,13 @@ export default function AuthScreen() {
     password: null,
     confirmation: null,
   });
+
+  const [errorConnection, setErrorConnection] = useState({
+    login: null,
+    password: null,
+  });
+
+  const { setUser, setConnected } = useContext(UserContext);
 
   const PATH = import.meta.env.VITE_PATH;
 
@@ -42,7 +49,34 @@ export default function AuthScreen() {
     });
 
     const text = await response.text();
-    console.log("text", text);
+    if (text === "Les deux mots de passe ne correspondent pas") {
+      setErrorRegister({
+        ...errorRegister,
+        confirmation: text,
+      });
+    } else if (text === "Ce login est déjà utilisé") {
+      setErrorRegister({
+        ...errorRegister,
+        login: text,
+      });
+    } else if (text === inscription.login) {
+      setErrorRegister({
+        ...errorRegister,
+        login: null,
+        password: null,
+        confirmation: null,
+      });
+      setConnexion({
+        ...connexion,
+        login: inscription.login,
+      });
+      setInscription({
+        ...inscription,
+        login: "",
+        password: "",
+        confirmation: "",
+      });
+    }
   };
 
   const handleConnection = async (e) => {
@@ -60,7 +94,34 @@ export default function AuthScreen() {
     });
 
     const text = await response.text();
-    console.log("text", text);
+    if (text === "Veuillez remplir tous les champs") {
+      setErrorConnection({
+        ...errorConnection,
+        login: text,
+        password: text,
+      });
+    } else if (text === "Les informations de connexion sont incorrectes") {
+      setErrorConnection({
+        ...errorConnection,
+        login: text,
+        password: text,
+      });
+    } else if (text === "ok") {
+      setErrorConnection({
+        ...errorConnection,
+        login: null,
+        password: null,
+      });
+      setUser(connexion.login);
+      // mettre le login dans le local storage
+      localStorage.setItem("login", connexion.login);
+      setConnexion({
+        ...connexion,
+        login: "",
+        password: "",
+      });
+      setConnected(true);
+    }
   };
 
   const verifyLogin = async (e) => {
@@ -123,6 +184,30 @@ export default function AuthScreen() {
           confirmation: null,
         });
       }
+    } else if (champ === "login_connection") {
+      if (connexion.login === "") {
+        setErrorConnection({
+          ...errorConnection,
+          login: "veuillez remplir ce champ",
+        });
+      } else {
+        setErrorConnection({
+          ...errorConnection,
+          login: null,
+        });
+      }
+    } else if (champ === "password_connection") {
+      if (connexion.password === "") {
+        setErrorConnection({
+          ...errorConnection,
+          password: "veuillez remplir ce champ",
+        });
+      } else {
+        setErrorConnection({
+          ...errorConnection,
+          password: null,
+        });
+      }
     }
   };
 
@@ -178,22 +263,30 @@ export default function AuthScreen() {
               id="login"
               type="text"
               placeholder="Pseudonyme"
+              value={connexion.login || ""}
               onChange={(e) => {
                 setConnexion({
                   ...connexion,
                   login: e.target.value,
                 });
               }}
+              onBlur={(e) => {
+                verifyBlank(e, "login_connection");
+              }}
             />
             <input
               id="password"
               type="password"
               placeholder="Mot de passe"
+              value={connexion.password || ""}
               onChange={(e) => {
                 setConnexion({
                   ...connexion,
                   password: e.target.value,
                 });
+              }}
+              onBlur={(e) => {
+                verifyBlank(e, "password_connection");
               }}
             />
             <input
@@ -210,6 +303,7 @@ export default function AuthScreen() {
               id="login_insc"
               type="text"
               placeholder="Pseudonyme"
+              value={inscription.login || ""}
               onChange={(e) => {
                 setInscription({
                   ...inscription,
@@ -221,6 +315,7 @@ export default function AuthScreen() {
             <input
               type="password"
               placeholder="Mot de passe"
+              value={inscription.password || ""}
               onChange={(e) => {
                 setInscription({
                   ...inscription,
@@ -235,6 +330,7 @@ export default function AuthScreen() {
             <input
               type="password"
               placeholder="Confirmation"
+              value={inscription.confirmation || ""}
               onChange={(e) => {
                 setInscription({
                   ...inscription,

@@ -71,8 +71,8 @@ class User extends Database
                 $_SESSION["login"] = $login;
                 $this->setUserName($login);
 
-                echo $login;
-                return "connectionOK";
+                echo "ok";
+                return "ok";
             } else {
                 echo "Les informations de connexion sont incorrectes";
                 return "Les informations de connexion sont incorrectes";
@@ -96,6 +96,30 @@ class User extends Database
             return $result;
         } else {
             return false;
+        }
+    }
+
+    public function context($login)
+    {
+        // on récupère toutes les données de l'utilisateur (sauf le mot de passe), ses transactions, et les catégories de ses transactions
+        $sql = "SELECT users.login, users.solde, transaction.*, category.* FROM `users` INNER JOIN `transaction` ON users.id_user = transaction.id_user INNER JOIN `category` ON transaction.id_categ = category.id_category WHERE `login` = :login";
+
+        // récup le user
+        // $sql = "SELECT * FROM `users` WHERE `login` = :login";
+
+        $prepare = $this->bdd->prepare($sql);
+        $prepare->execute([':login' => $login]);
+        $result = $prepare->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            // on récupère toutes les données de l'utilisateur (sauf le mot de passe)
+            $sql2 = "SELECT login, solde FROM `users` WHERE `login` = :login";
+            $prepare2 = $this->bdd->prepare($sql2);
+            $prepare2->execute([':login' => $login]);
+            $result2 = $prepare2->fetch(PDO::FETCH_ASSOC);
+            return $result2;
         }
     }
 }

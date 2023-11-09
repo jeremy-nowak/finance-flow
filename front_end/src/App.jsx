@@ -1,19 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useContext } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 
-import AuthScreen from './screens/AuthScreen'
+import { UserContext } from "./Context/UserContext";
+import "./App.css";
+
+import AuthScreen from "./screens/AuthScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { setUser, setConnected, connected } = useContext(UserContext);
+  console.log("connected", connected);
 
   return (
     <>
-      <AuthScreen/>
-      <div><p>Starter app</p></div>
+      {!connected && <AuthScreen />}
+      {connected && <HomeScreen />}
+      <div>
+        <p>Starter app</p>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

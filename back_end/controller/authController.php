@@ -22,6 +22,14 @@ if (isset($_POST["connection"])) {
     }
 }
 
+//    Context
+if (isset($_POST["context"])) {
+    $login = htmlspecialchars($_POST["user"]);
+    $data = $user->context($login);
+    echo json_encode($data);
+}
+
+//    Register
 if (isset($_POST["register"])) {
 
     if ($_POST["register"] == "register") {
