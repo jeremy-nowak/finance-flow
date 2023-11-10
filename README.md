@@ -33,3 +33,11 @@ Avoir plein de données chiffrées, c'est bien, cependant, ce n’est peut-être
 Pour ce faire, le moyen le plus simple serait d’utiliser une librairie pour générer des graphiques permettant de visualiser ces données. Parmi les librairies les plus couramment utilisées, vous pouvez retrouver [D3.js](https://d3js.org/) ou [Chart.js](https://www.chartjs.org/).
 
 N'hésitez pas à contribuer à ce projet et à apporter des améliorations pour créer un gestionnaire de budget encore plus complet et convivial ! 🚀
+
+## Installation
+
+
+Lorsque vous recuperez le projet, veuillez créer un fichier ".env" dans le dossier "front_end" afin d'indiquer le path jusqu'au dossier "back_end" en suivant l'exemple-ci dessous:
+
+![image](https://github.com/jeremy-nowak/finance-flow/assets/114387779/84d4916f-ca85-4fa5-9065-1f9104f35821)
+
