@@ -3,8 +3,6 @@ import { createContext, useState, useEffect, useContext } from "react";
 export const CategContext = createContext();
 
 const CategProvider = ({ children }) => {
-    const [incomeCateg, setIncomeCateg] = useState([]);
-    const [outgoingCateg, setOutgoingCateg] = useState([]);
     const [categ, setCateg] = useState({
         income: [],
         outgoing: [],
@@ -18,27 +16,26 @@ const CategProvider = ({ children }) => {
 
             const response = await fetch(`${PATH}controller/categController.php?categ`);
             const res = await response.json();
-            console.log("res", res);
-            // mettre les catégories ayant pour type "crédit" dans le state "income", et les autres dans le state "outgoing"
-            const income= [];
-            const outgoing = [];
+            // console.log("res", res);
+
+            const incomeTemp= [];
+            const outgoingTemp = [];
+
             res.map((item) => {
-                console.log("item", item.name);
+                // console.log("item", item.name);
                 if (item.type == "credit") {
-                    income.push(item.name);
-                    console.log("income", income);
+                    incomeTemp.push(item.name);
                 } else {
-                    outgoing.push(item.name);
-                    console.log("outgoing", outgoing);
+                    outgoingTemp.push(item.name);
                 }
 
-                // si la lenght de income est égale à 4, on met income dans le state incomeCateg
-                if (income.length == 4) {
-                    setIncomeCateg(income);
-                }
-                // si la lenght de outgoing est égale à 4, on met outgoing dans le state outgoingCateg
-                if (outgoing.length == 4) {
-                    setOutgoingCateg(outgoing);
+                // si la length de income et outgoingTemp est égale à 4, on set les states
+                if (incomeTemp.length == 4 && outgoingTemp.length == 4) {
+                    setCateg({
+                        ...categ,
+                        income: incomeTemp,
+                        outgoing: outgoingTemp,
+                    }); 
                 }
             });
 
@@ -55,12 +52,8 @@ const CategProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        setCateg({
-            income: incomeCateg,
-            outgoing: outgoingCateg,
-        });
-
-    }, [incomeCateg, outgoingCateg]);
+        console.log("🚀 ~ file: CategContext.jsx:63 ~ CategProvider ~ categ:", categ)
+    }, [categ]);
 
 
 
