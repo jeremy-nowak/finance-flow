@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 
+
 export default function AuthScreen() {
   // ________________________
   // Variables
@@ -259,6 +260,9 @@ export default function AuthScreen() {
       <section>
         <div id="connexion">
           <form method="post">
+          <label className="block text-xl font-medium leading-6 text-red-900">
+          Price
+          </label>
             <input
               id="login"
               type="text"
