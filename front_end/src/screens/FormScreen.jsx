@@ -8,12 +8,6 @@ export default function FormScreen() {
 const [title, setTitle] = useState("Outgoing");
 
 
-
-useEffect(() => {
-    console.log("title", title);
-}, [title]);
-
-
     return(
 
         <div>
