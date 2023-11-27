@@ -79,6 +79,7 @@ export default function AuthScreen() {
         password: "",
         confirmation: "",
       });
+      setSignUp(!signUp);
     }
   };
 
@@ -265,15 +266,11 @@ export default function AuthScreen() {
     <div className="flex xs:justify-end xs:items-end lg:justify-center lg:items-center h-screen">
       <div className="xs:h-1/2" >
       </div>
-
-
       <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">  
 
         {signUp ?
         <div id="inscription" className="h-full">
           <h1 className="m-5 text-white text-3xl">Register</h1>
-          
-         
           
           <form action="" method="post">
             <div className="relative p-12 rounded-md">
@@ -297,7 +294,7 @@ export default function AuthScreen() {
                   onBlur={verifyLogin}
                 />
 
-                {errorRegister.login && <p>{errorRegister.login} (Login)</p>}
+                {errorRegister.login && <p className="text-white mb-2">{errorRegister.login} (Login)</p>}
 
                 <label className="block text-xl font-medium leading-6 text-white mb-2">
                   Password
@@ -318,14 +315,14 @@ export default function AuthScreen() {
                   }}
                 />
                  {errorRegister.password && (
-            <p>{errorRegister.password} (mot de passe)</p>
+            <p className="text-white mb-2">{errorRegister.password} (mot de passe)</p>
           )}
                 <label className="block text-xl font-medium leading-6 text-white mb-2">
                   Confirmation
                 </label>
                 <input
                   type="password"
-                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
                   value={inscription.confirmation || ""}
                   onChange={(e) => {
                     setInscription({
@@ -339,7 +336,7 @@ export default function AuthScreen() {
                   }}
                 />
                 {errorRegister.confirmation && (
-                <p>{errorRegister.confirmation} (confirmation)</p>
+                <p className="text-white mb-2">{errorRegister.confirmation} (confirmation)</p>
                 )}
                 <input
                   type="submit"
@@ -394,7 +391,7 @@ export default function AuthScreen() {
               <input
                 id="password"
                 type="password"
-                className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-8"
+                className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
 
                 value={connexion.password || ""}
                 onChange={(e) => {
