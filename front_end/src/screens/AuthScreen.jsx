@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 
+
 export default function AuthScreen() {
   // ________________________
   // Variables
@@ -255,14 +256,23 @@ export default function AuthScreen() {
   };
 
   return (
-    <>
-      <section>
+    <div style={{height : "100vh"}}>
+    <div style={{height: "50%"}}>
+    </div>
+      <section style={{height : "50%", display :"flex", alignItems:"center", justifyContent : "flex-end", flexDirection :"column", borderRadius:"20px 20px 0 0", backgroundColor :"rgba(255, 255, 255, .2) "}}>
         <div id="connexion">
           <form method="post">
+          <h1 className="mt-5 ml-6 text-white text-xl">Login</h1>
+          <div className="relative mt-2 p-12 rounded-md">
+          <div className="pointer-events-none inset-y-0 left-0 flex-col items-center p-3">
+          <label className="block text-md font-medium leading-6 text-white">
+          Login
+          </label>
             <input
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-2"
               id="login"
               type="text"
-              placeholder="Pseudonyme"
+              
               value={connexion.login || ""}
               onChange={(e) => {
                 setConnexion({
@@ -274,10 +284,17 @@ export default function AuthScreen() {
                 verifyBlank(e, "login_connection");
               }}
             />
+            
+            <label className="block text-md font-medium leading-6 text-white">
+            Password
+            </label>
+          
+
             <input
               id="password"
               type="password"
-              placeholder="Mot de passe"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-6"
+
               value={connexion.password || ""}
               onChange={(e) => {
                 setConnexion({
@@ -289,20 +306,34 @@ export default function AuthScreen() {
                 verifyBlank(e, "password_connection");
               }}
             />
+            
             <input
               type="submit"
+              className="block w-full rounded-md border-0 bg-white py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               value={"Se connecter"}
               onClick={handleConnection}
             />
+            <div className="flex justify-center mt-6">
+            <p className="text-white">Not a member ? <span className="text-blue-400 underline">Sign in</span></p>
+            </div>
+            </div>
+            </div>
           </form>
+          
         </div>
-
-        <div id="inscription">
+        
+        <div id="inscription" style={{width : "100%", border: "2px solid white", display:"none"}}>
+        <h1 className="m-4 text-white text-xl">Register</h1>
           <form action="" method="post">
+          <div className="relative mt-2 p-12 rounded-md">
+          <div className="pointer-events-none  inset-y-0 left-0 flex-col items-center p-3">
+          <label className="block text-xl font-medium leading-6 text-white">
+          Login
+          </label>
             <input
               id="login_insc"
               type="text"
-              placeholder="Pseudonyme"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
               value={inscription.login || ""}
               onChange={(e) => {
                 setInscription({
@@ -312,9 +343,12 @@ export default function AuthScreen() {
               }}
               onBlur={verifyLogin}
             />
+             <label className="block text-xl font-medium leading-6 text-white">
+          Password
+          </label>
             <input
               type="password"
-              placeholder="Mot de passe"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-2"
               value={inscription.password || ""}
               onChange={(e) => {
                 setInscription({
@@ -327,9 +361,12 @@ export default function AuthScreen() {
                 verifyBlank(e, "password");
               }}
             />
+             <label className="block text-xl font-medium leading-6 text-white">
+          Confirmation
+          </label>
             <input
               type="password"
-              placeholder="Confirmation"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-6"
               value={inscription.confirmation || ""}
               onChange={(e) => {
                 setInscription({
@@ -344,9 +381,12 @@ export default function AuthScreen() {
             />
             <input
               type="submit"
+              className="block w-full rounded-md border-0 bg-white py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               value={"S'inscrire"}
               onClick={handleRegister}
             />
+            </div>
+            </div>
           </form>
           {errorRegister.login && <p>{errorRegister.login} (Login)</p>}
           {errorRegister.password && (
@@ -357,6 +397,6 @@ export default function AuthScreen() {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }
