@@ -256,13 +256,13 @@ export default function AuthScreen() {
   };
 
   return (
-    <div style={{height:"100%"}}>
-    <div style={{height : "350px"}}>
+    <div style={{height : "100vh"}}>
+    <div style={{height: "50%"}}>
     </div>
-      <section style={{display :"flex", alignItems:"center", flexDirection :"column", borderRadius:"20px 20px 0 0", backgroundColor :"rgba(255, 255, 255, .2) "}}>
+      <section style={{height : "50%", display :"flex", alignItems:"center", justifyContent : "flex-end", flexDirection :"column", borderRadius:"20px 20px 0 0", backgroundColor :"rgba(255, 255, 255, .2) "}}>
         <div id="connexion">
           <form method="post">
-          <h1 className="m-4 text-white text-xl">Login</h1>
+          <h1 className="mt-5 ml-6 text-white text-xl">Login</h1>
           <div className="relative mt-2 p-12 rounded-md">
           <div className="pointer-events-none inset-y-0 left-0 flex-col items-center p-3">
           <label className="block text-md font-medium leading-6 text-white">
@@ -333,7 +333,7 @@ export default function AuthScreen() {
             <input
               id="login_insc"
               type="text"
-              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-2"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
               value={inscription.login || ""}
               onChange={(e) => {
                 setInscription({
