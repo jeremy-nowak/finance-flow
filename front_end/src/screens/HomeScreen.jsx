@@ -5,6 +5,7 @@ import { UserContext } from "../Context/UserContext";
 import DisplaySolde from "../components/DisplaySolde";
 import ButtonAdd from "../components/ButtonAdd";
 import FormScreen from "./FormScreen";
+import DecoButton from "../components/DecoButton";
 
 export default function HomeScreen() {
   const { user } = useContext(UserContext);
@@ -16,6 +17,7 @@ export default function HomeScreen() {
       <DisplaySolde />
       <ButtonAdd />
       <FormScreen />
+      <DecoButton />
     </div>
   );
 }
