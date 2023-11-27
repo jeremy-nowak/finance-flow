@@ -28,6 +28,12 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  const handleLogout = () => {
+    setUser(null);
+    setConnected(false);
+    localStorage.removeItem("login");
+  };
+
   useEffect(() => {
     if (user) {
       fetchUser();
@@ -46,7 +52,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, data, connected, setConnected }}
+      value={{ user, setUser, data, connected, setConnected, handleLogout }}
     >
       {children}
     </UserContext.Provider>
