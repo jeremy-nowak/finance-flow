@@ -265,6 +265,77 @@ export default function AuthScreen() {
     <div className="flex xs:justify-end xs:items-end lg:justify-center lg:items-center h-screen">
       <div className="xs:h-1/2" >
       </div>
+
+      <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">
+
+        <div id="connexion" style={{ display: "block" }}>
+          <form method="post">
+            <h1 className="mt-5 ml-6 text-white text-xl">Login</h1>
+            <div className="relative p-12 rounded-md">
+              <div className="pointer-events-none inset-y-0 left-0 flex-col items-center p-3">
+                <label className="block text-xl font-medium leading-6 text-white mb-2">
+                  Login
+                </label>
+                <input
+                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-2"
+                  id="login"
+                  type="text"
+
+                  value={connexion.login || ""}
+                  onChange={(e) => {
+                    setConnexion({
+                      ...connexion,
+                      login: e.target.value,
+                    });
+                  }}
+                  onBlur={(e) => {
+                    verifyBlank(e, "login_connection");
+                  }}
+                />
+
+                <label className="block text-xl font-medium leading-6 text-white mb-2">
+                  Password
+                </label>
+
+
+                <input
+                  id="password"
+                  type="password"
+                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-8"
+
+                  value={connexion.password || ""}
+                  onChange={(e) => {
+                    setConnexion({
+                      ...connexion,
+                      password: e.target.value,
+                    });
+                  }}
+                  onBlur={(e) => {
+                    verifyBlank(e, "password_connection");
+                  }}
+                />
+
+                <input
+                  type="submit"
+                  className="block w-full rounded-md border-0 bg-[#181E5A] py-1.5 text-xl text-white ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={"Sign in"}
+                  onClick={handleConnection}
+                />
+                <div className="flex justify-center mt-9">
+                  <p className="text-white">Not a member ? <span className="text-blue-400 underline text-xl">Sign up</span></p>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div id="inscription" style={{display : "block"}}>
+          <h1 className="mt-5 ml-6 text-white text-xl">Register</h1>
+          <form action="" method="post">
+            <div className="relative p-12 rounded-md">
+            <div className="pointer-events-none inset-y-0 left-0 flex-col items-center p-3">
+
       <section className="xs:h-1/2 xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">  
 
         {signUp ?
@@ -273,6 +344,7 @@ export default function AuthScreen() {
           <form action="" method="post">
             <div className="relative p-12 rounded-md">
               <div className="inset-y-0 left-0 flex-col items-center p-3 m">
+
                 <label className="block text-xl font-medium leading-6 text-white mb-2">
                   Login
                 </label>
@@ -312,7 +384,7 @@ export default function AuthScreen() {
                 </label>
                 <input
                   type="password"
-                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-6"
+                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-8"
                   value={inscription.confirmation || ""}
                   onChange={(e) => {
                     setInscription({
@@ -327,11 +399,12 @@ export default function AuthScreen() {
                 />
                 <input
                   type="submit"
-                  className="block w-full rounded-md border-0 bg-white py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={"S'inscrire"}
+                  className="block w-full rounded-md border-0 bg-[#181E5A] py-1.5 text-xl text-white ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={"Sign up"}
                   onClick={handleRegister}
                 />
-                              <div className="flex justify-center mt-9">
+
+                 <div className="flex justify-center mt-9">
                 <p className="text-white">Already a member ? <span onClick={(e) => {
                   e.preventDefault();
                   setSignUp(!signUp)}} className="text-blue-400 underline cursor-pointer">Sign in</span></p>
