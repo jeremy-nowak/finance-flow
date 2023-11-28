@@ -25,10 +25,14 @@ export default function HomeScreen() {
       <div>
         <DateButton /> 
       </div>
-      <div>
+      {/* <div className="recap">
+        <div className="xs:w-full lg:w-1/4">
        <SpendDonut />
+       </div>
+       <div className="xs:w-full lg:w-1/4">
       <IncomeDonut />
       </div>
+      </div> */}
       <DisplaySolde />
       <FormScreen />
       
