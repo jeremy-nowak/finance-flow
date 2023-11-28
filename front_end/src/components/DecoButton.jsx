@@ -5,7 +5,7 @@ const DecoButton = () => {
   const { handleLogout } = useContext(UserContext);
   return (
     <div className="deco-button">
-      <button onClick={handleLogout}><img src="/out.svg"></img></button>
+      <button className=" xs:w-2/3" onClick={handleLogout}><img src="/out.svg"></img></button>
     </div>
   );
 };
