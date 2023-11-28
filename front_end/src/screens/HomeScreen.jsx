@@ -1,8 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { UserContext } from "../Context/UserContext";
 
-import DisplaySolde from "../components/DisplaySolde";
 import FormScreen from "./FormScreen";
 import DecoButton from "../components/DecoButton";
 import Footer from "../components/Footer";
@@ -11,7 +10,7 @@ import IncomeDonut from "../components/IncomeDonut";
 import DateButton from "../components/DateButton";
 
 export default function HomeScreen() {
-  const { user } = useContext(UserContext);
+  const { user, displayForm } = useContext(UserContext);
 
   
 
@@ -33,10 +32,10 @@ export default function HomeScreen() {
       <IncomeDonut />
       </div>
       </div>
-      <DisplaySolde />
-      <FormScreen />
       
-      <Footer />
+      {displayForm && <FormScreen />}
+      
+      <Footer/>
     </div>
   );
 }
