@@ -15,8 +15,8 @@ export default function HomeScreen() {
   
 
   return (
-    <div>
-      
+    <div className="h-screen">
+      <div className="h-[90%]">
       <div className="flex justify-between p-5 items-center">
       <p className="text-white text-xl">Bonjour {user}</p>
       <DecoButton />
@@ -33,8 +33,12 @@ export default function HomeScreen() {
       </div>
       </div>
       
-      {displayForm && <FormScreen />}
-      
+      {displayForm && 
+      <div className="slideInUp z-10 absolute bottom-20 transform -translate-x-[-4%]">
+        <FormScreen />
+      </div>
+      }
+      </div>
       <Footer/>
     </div>
   );
