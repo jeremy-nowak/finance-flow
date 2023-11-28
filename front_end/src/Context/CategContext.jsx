@@ -3,75 +3,70 @@ import { createContext, useState, useEffect, useContext } from "react";
 export const CategContext = createContext();
 
 const CategProvider = ({ children }) => {
-    const [incomeCateg, setIncomeCateg] = useState([]);
-    const [outgoingCateg, setOutgoingCateg] = useState([]);
-    const [categ, setCateg] = useState({
-        income: [],
-        outgoing: [],
-    });
+  const [incomeCateg, setIncomeCateg] = useState({});
+  const [spendCateg, setSpendCateg] = useState({});
+  const [categ, setCateg] = useState({
+    income: {},
+    spend: {},
+  });
 
-    const PATH = import.meta.env.VITE_PATH;
+  const PATH = import.meta.env.VITE_PATH;
 
-    const fetchCateg = async () => {
+  const fetchCateg = async () => {
+    try {
+      const response = await fetch(
+        `${PATH}controller/categController.php?categ`
+      );
+      const res = await response.json();
+      // mettre les catégories ayant pour type "crédit" dans le state "income", et les autres dans le state "spend" avec leur id
+      let income = {
+        id: [],
+        name: [],
+      };
+      let spend = {
+        id: [],
+        name: [],
+      };
 
-        try{
-
-            const response = await fetch(`${PATH}controller/categController.php?categ`);
-            const res = await response.json();
-            console.log("res", res);
-            // mettre les catégories ayant pour type "crédit" dans le state "income", et les autres dans le state "outgoing"
-            const income= [];
-            const outgoing = [];
-            res.map((item) => {
-                console.log("item", item.name);
-                if (item.type == "credit") {
-                    income.push(item.name);
-                    console.log("income", income);
-                } else {
-                    outgoing.push(item.name);
-                    console.log("outgoing", outgoing);
-                }
-
-                // si la lenght de income est égale à 4, on met income dans le state incomeCateg
-                if (income.length == 4) {
-                    setIncomeCateg(income);
-                }
-                // si la lenght de outgoing est égale à 4, on met outgoing dans le state outgoingCateg
-                if (outgoing.length == 4) {
-                    setOutgoingCateg(outgoing);
-                }
-            });
-
-        }catch (err){
-            console.log(err);
-
+      res.map((item) => {
+        if (item.type == "credit") {
+          income.id.push(item.id_category);
+          income.name.push(item.name);
+        } else {
+          spend.id.push(item.id_category);
+          spend.name.push(item.name);
         }
-        
 
-}
+        // si la lengthde income.id et income.name est égale à 4, on met income dans le state incomeCateg
+        if (income.id.length == 4 && income.name.length == 4) {
+          setIncomeCateg(income);
+        }
+        // si la lenght de spend est égale à 4, on met spend dans le state spendCateg
+        if (spend.id.length == 4 && spend.name.length == 4) {
+          setSpendCateg(spend);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    useEffect(() => {
-        fetchCateg();
-    }, []);
+  useEffect(() => {
+    fetchCateg();
+  }, []);
 
-    useEffect(() => {
-        setCateg({
-            income: incomeCateg,
-            outgoing: outgoingCateg,
-        });
+  useEffect(() => {
+    setCateg({
+      income: incomeCateg,
+      spend: spendCateg,
+    });
+  }, [incomeCateg, spendCateg]);
 
-    }, [incomeCateg, outgoingCateg]);
-
-
-
-    return(
-
-        <CategContext.Provider value={{ categ, setCateg }}>
-            {children}
-        </CategContext.Provider>
-    
-    )
-
-}
+  return (
+    <CategContext.Provider value={{ categ, setCateg }}>
+      {children}
+    </CategContext.Provider>
+  );
+};
 
 export default CategProvider;
