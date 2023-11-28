@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 export const CategContext = createContext();
 
 const CategProvider = ({ children }) => {
+
   const [incomeCateg, setIncomeCateg] = useState({});
   const [spendCateg, setSpendCateg] = useState({});
   const [categ, setCateg] = useState({
@@ -35,7 +36,9 @@ const CategProvider = ({ children }) => {
         } else {
           spend.id.push(item.id_category);
           spend.name.push(item.name);
+
         }
+
 
         // si la lengthde income.id et income.name est égale à 4, on met income dans le state incomeCateg
         if (income.id.length == 4 && income.name.length == 4) {
@@ -61,6 +64,25 @@ const CategProvider = ({ children }) => {
       spend: spendCateg,
     });
   }, [incomeCateg, spendCateg]);
+
+    useEffect(() => {
+        fetchCateg();
+    }, []);
+
+    useEffect(() => {
+        console.log("🚀 ~ file: CategContext.jsx:63 ~ CategProvider ~ categ:", categ)
+    }, [categ]);
+
+
+
+    return(
+
+        <CategContext.Provider value={{ categ, setCateg }}>
+            {children}
+        </CategContext.Provider>
+    
+    )
+
 
   return (
     <CategContext.Provider value={{ categ, setCateg }}>

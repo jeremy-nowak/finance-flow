@@ -12,13 +12,11 @@ function App() {
   const { setUser, setConnected, connected } = useContext(UserContext);
 
   return (
-    <>
+    <div style={{backgroundColor : "#181E5A"}}>
       {!connected && <AuthScreen />}
       {connected && <HomeScreen />}
-      <div>
-        <p>Starter app</p>
-      </div>
-    </>
+     
+    </div>
   );
 }
 
