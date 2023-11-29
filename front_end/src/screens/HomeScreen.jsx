@@ -1,8 +1,6 @@
-import { useContext } from "react";
-
+import { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 
-import DisplaySolde from "../components/DisplaySolde";
 import FormScreen from "./FormScreen";
 import DecoButton from "../components/DecoButton";
 import Footer from "../components/Footer";
@@ -11,10 +9,12 @@ import IncomeDonut from "../components/IncomeDonut";
 import DateButton from "../components/DateButton";
 
 export default function HomeScreen() {
-  const { user } = useContext(UserContext);
+  const { user, displayForm } = useContext(UserContext);
 
   return (
-    <div>
+
+    <div className="h-screen">
+      <div className="h-[90%]">
       <div className="flex justify-between p-5 items-center">
         <p className="text-white text-xl">Bonjour {user.login}</p>
         <DecoButton />
@@ -30,10 +30,14 @@ export default function HomeScreen() {
           <IncomeDonut />
         </div>
       </div>
-      <DisplaySolde />
-      <FormScreen />
-
-      <Footer />
+      
+      {displayForm && 
+     
+        <FormScreen />
+      
+      }
+      </div>
+      <Footer/>
     </div>
   );
 }

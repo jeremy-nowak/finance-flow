@@ -12,7 +12,7 @@ function App() {
   const { setUser, setConnected, connected } = useContext(UserContext);
 
   return (
-    <div style={{backgroundColor : "#181E5A"}}>
+    <div className="h-screen" style={{backgroundColor : "#181E5A"}}>
       {!connected && <AuthScreen />}
       {connected && <HomeScreen />}
      

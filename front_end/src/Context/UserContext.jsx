@@ -9,6 +9,8 @@ const UserProvider = ({ children }) => {
   });
   const [data, setData] = useState({});
   const [connected, setConnected] = useState(false);
+  const [ displayForm, setDisplayForm ] = useState(false);
+
 
   const PATH = import.meta.env.VITE_PATH;
 
@@ -60,7 +62,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, data, connected, setConnected, handleLogout }}
+      value={{ user, setUser, data, connected, setConnected, handleLogout, displayForm, setDisplayForm }}
     >
       {children}
     </UserContext.Provider>
