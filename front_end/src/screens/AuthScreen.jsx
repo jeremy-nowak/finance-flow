@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 
-
 export default function AuthScreen() {
   // ________________________
   // Variables
@@ -97,7 +96,8 @@ export default function AuthScreen() {
       body: data,
     });
 
-    const text = await response.text();
+    const text = await response.json();
+    console.log("text", text.id_user);
     if (text === "Veuillez remplir tous les champs") {
       setErrorConnection({
         ...errorConnection,
@@ -110,15 +110,16 @@ export default function AuthScreen() {
         login: text,
         password: text,
       });
-    } else if (text === "ok") {
+    } else if (text.id_user) {
       setErrorConnection({
         ...errorConnection,
         login: null,
         password: null,
       });
-      setUser(connexion.login);
-      // mettre le login dans le local storage
-      localStorage.setItem("login", connexion.login);
+      setUser(text);
+      // mettre le login et l'id dans le local storage
+      localStorage.setItem("login", text.login);
+      localStorage.setItem("id_user", text.id_user);
       setConnexion({
         ...connexion,
         login: "",
@@ -258,24 +259,17 @@ export default function AuthScreen() {
     }
   };
 
-  useEffect(() => {
-    console.log("signUp", signUp);
-  }, [signUp]);
-
   return (
-    <div className="flex xs:justify-end xs:items-end lg:justify-center lg:items-center h-screen">
-      <div className="xs:h-1/2" >
-      </div>
+    <div>
+      <div className="xs:h-1/2"></div>
       <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">
-
-        {signUp ?
+        {signUp ? (
           <div id="inscription" className="h-full">
             <h1 className="m-5 text-white text-3xl">Register</h1>
 
             <form action="" method="post">
               <div className="relative p-12 rounded-md">
                 <div className="inset-y-0 left-0 flex-col items-center p-3">
-
                   <label className="block text-xl font-medium leading-6 text-white mb-2">
                     Login
                   </label>
@@ -294,7 +288,11 @@ export default function AuthScreen() {
                     onBlur={verifyLogin}
                   />
 
-                  {errorRegister.login && <p className="text-white mb-2">{errorRegister.login} (Login)</p>}
+                  {errorRegister.login && (
+                    <p className="text-white mb-2">
+                      {errorRegister.login} (Login)
+                    </p>
+                  )}
 
                   <label className="block text-xl font-medium leading-6 text-white mb-2">
                     Password
@@ -315,7 +313,9 @@ export default function AuthScreen() {
                     }}
                   />
                   {errorRegister.password && (
-                    <p className="text-white mb-2">{errorRegister.password} (mot de passe)</p>
+                    <p className="text-white mb-2">
+                      {errorRegister.password} (mot de passe)
+                    </p>
                   )}
                   <label className="block text-xl font-medium leading-6 text-white mb-2">
                     Confirmation
@@ -336,7 +336,9 @@ export default function AuthScreen() {
                     }}
                   />
                   {errorRegister.confirmation && (
-                    <p className="text-white mb-2">{errorRegister.confirmation} (confirmation)</p>
+                    <p className="text-white mb-2">
+                      {errorRegister.confirmation} (confirmation)
+                    </p>
                   )}
                   <input
                     type="submit"
@@ -346,19 +348,24 @@ export default function AuthScreen() {
                   />
 
                   <div className="flex justify-center mt-9">
-                    <p className="text-white">Already a member ? <span onClick={(e) => {
-                      e.preventDefault();
-                      setSignUp(!signUp)
-                    }} className="text-blue-400 underline cursor-pointer">Sign in</span></p>
+                    <p className="text-white">
+                      Already a member ?{" "}
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSignUp(!signUp);
+                        }}
+                        className="text-blue-400 underline cursor-pointer"
+                      >
+                        Sign in
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
             </form>
-
           </div>
-
-          :
-
+        ) : (
           <div id="connexion" className="h-full">
             <form method="post">
               <h1 className="m-5 text-white text-3xl">Login</h1>
@@ -371,7 +378,6 @@ export default function AuthScreen() {
                     className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
                     id="login"
                     type="text"
-
                     value={connexion.login || ""}
                     onChange={(e) => {
                       setConnexion({
@@ -388,12 +394,10 @@ export default function AuthScreen() {
                     Password
                   </label>
 
-
                   <input
                     id="password"
                     type="password"
                     className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
-
                     value={connexion.password || ""}
                     onChange={(e) => {
                       setConnexion({
@@ -413,20 +417,25 @@ export default function AuthScreen() {
                     onClick={handleConnection}
                   />
                   <div className="flex justify-center mt-9">
-                    <p className="text-white">Not a member ? <span onClick={(e) => {
-                      e.preventDefault();
-                      setSignUp(!signUp);
-                    }} className="text-blue-400 underline cursor-pointer">Sign up</span></p>
+                    <p className="text-white">
+                      Not a member ?{" "}
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSignUp(!signUp);
+                        }}
+                        className="text-blue-400 underline cursor-pointer"
+                      >
+                        Sign up
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
             </form>
-
           </div>
-
-        }
+        )}
       </section>
     </div>
   );
 }
-

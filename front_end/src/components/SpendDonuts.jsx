@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useEffect } from "react";
+import Chart from "chart.js/auto";
 import { useContext } from "react";
 
 import { UserContext } from "../Context/UserContext";
@@ -7,17 +7,12 @@ import { UserContext } from "../Context/UserContext";
 import DisplaySolde from "../components/DisplaySolde";
 
 export default function SpendDonut() {
-    const { user } = useContext(UserContext);
-    const { data } = useContext(UserContext);
-    useEffect(() => {
-        const ctx = document.getElementById('spendChart');
+  const { user } = useContext(UserContext);
+  const { data } = useContext(UserContext);
 
-        if (ctx) {
-            // Check if there is an existing Chart instance and destroy it
-            const existingChart = Chart.getChart(ctx);
-            if (existingChart) {
-                existingChart.destroy();
-            }
+  useEffect(() => {
+    const ctx = document.getElementById("spendChart");
+
 
             // Create a new Chart instance
             const newChart = new Chart(ctx, {
