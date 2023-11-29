@@ -3,7 +3,10 @@ import { createContext, useState, useEffect, useContext } from "react";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    login: null,
+    id_user: null,
+  });
   const [data, setData] = useState({});
   const [connected, setConnected] = useState(false);
 
@@ -12,7 +15,7 @@ const UserProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       let data = new FormData();
-      data.append("user", user);
+      data.append("user", user.login);
       data.append("context", "fetchUser");
 
       const response = await fetch(`${PATH}controller/authController.php`, {
@@ -32,6 +35,7 @@ const UserProvider = ({ children }) => {
     setUser(null);
     setConnected(false);
     localStorage.removeItem("login");
+    localStorage.removeItem("id_user");
   };
 
   useEffect(() => {
@@ -45,10 +49,14 @@ const UserProvider = ({ children }) => {
   // si l'utilisateur est en localstorage, on le connecte automatiquement
   useEffect(() => {
     if (localStorage.getItem("login")) {
-      setUser(localStorage.getItem("login"));
+      setUser({
+        login: localStorage.getItem("login"),
+        id_user: localStorage.getItem("id_user"),
+      });
+
       setConnected(true);
     }
-  });
+  }, []);
 
   return (
     <UserContext.Provider

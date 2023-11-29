@@ -71,8 +71,8 @@ class User extends Database
                 $_SESSION["login"] = $login;
                 $this->setUserName($login);
 
-                echo "ok";
-                return "ok";
+                echo json_encode($result);
+                return $result;
             } else {
                 echo "Les informations de connexion sont incorrectes";
                 return "Les informations de connexion sont incorrectes";
