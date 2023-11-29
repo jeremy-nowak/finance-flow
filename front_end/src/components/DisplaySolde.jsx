@@ -8,7 +8,7 @@ function DisplaySolde() {
     
     return (
             <div className="flex justify-center mb-4">
-            <h1 className="text-white text-5xl">{data.solde}</h1>
+            <h1 className="text-black text-5xl">{data.solde}</h1>
             </div>
     );
 

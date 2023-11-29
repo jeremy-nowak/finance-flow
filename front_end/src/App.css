@@ -1,4 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
 *{
     font-family: "Plus Jakarta Sans", sans-serif;
+    scrollbar-width: none;
+    
+    
 }
+*::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+
+
+.slideInUp {
+    animation: slideInUpAnimation 0.5s ease-in-out;
+  }
+  
