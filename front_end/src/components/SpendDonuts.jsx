@@ -13,34 +13,36 @@ export default function SpendDonut() {
   useEffect(() => {
     const ctx = document.getElementById("spendChart");
 
-    if (ctx) {
-      // Check if there is an existing Chart instance and destroy it
-      const existingChart = Chart.getChart(ctx);
-      if (existingChart) {
-        existingChart.destroy();
-      }
 
-      // Create a new Chart instance
-      const newChart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: ["Essentiel", "Loisirs", "Epargne", "Autres"],
-          datasets: [
-            {
-              label: "Spend",
-              data: [data.solde, 400, 1000, 520],
-              backgroundColor: ["#7B0828", "#00A878", "#FFC759", "#79ADDC"],
-              hoverOffset: 4,
-            },
-          ],
-        },
-      });
-    }
-  }, [data]); // The empty dependency array ensures that this effect runs once after the initial render
+            // Create a new Chart instance
+            const newChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Essential', 'Loisirs', 'Epargne', 'Autres'],
+                    datasets: [{
+                        label: 'Spend',
+                        data: [data.solde, 400, 1000, 520],
+                        backgroundColor: [
+                            '#7B0828',
+                            '#00A878',
+                            '#FFC759',
+                            '#79ADDC',
+                            
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options:{
+                    color : "white"
+                }
+                
+            });
+        }
+    }, []); // The empty dependency array ensures that this effect runs once after the initial render
 
-  return (
-    <div>
-      <canvas id="spendChart" width="180" height="180"></canvas>
-    </div>
-  );
+    return (
+       
+            <canvas id="spendChart"></canvas>
+        
+    );
 }
