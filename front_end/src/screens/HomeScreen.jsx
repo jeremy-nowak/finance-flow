@@ -7,38 +7,59 @@ import Footer from "../components/Footer";
 import SpendDonut from "../components/SpendDonuts";
 import IncomeDonut from "../components/IncomeDonut";
 import DateButton from "../components/DateButton";
+import TransactionList from "../components/TransactionList";
+import RecapBar from "../components/RecapBar";
+import Form from "../components/Form";
 
 export default function HomeScreen() {
   const { user, displayForm } = useContext(UserContext);
 
-  
+
 
   return (
-    <div className="h-screen">
-      <div className="h-[90%]">
-      <div className="flex justify-between p-5 items-center">
-      <p className="text-white text-xl">Bonjour {user}</p>
-      <DecoButton />
-      </div>
+    <div>
       <div>
-        <DateButton /> 
+
+        <div className="flex justify-between p-5 items-center m-5">
+          <h2 className="text-white text-2xl">Bonjour {user}</h2>
+          <DecoButton />
+        </div>
+
+        <div className="m-10 bg-white bg-opacity-25 rounded-xl">
+          <DateButton />
+        </div>
+
+        <section className="m-10 flex flex-row">
+          <div className="w-full">
+            <div className="flex flex-row bg-white bg-opacity-25 rounded-xl justify-evenly mr-5">
+              <div className="w-2/5 flex flex-col items-center p-2">
+                <SpendDonut />
+                <p className="text-3xl p-2 text-[#FF9393] font-bold">600€</p>
+              </div>
+              <div className="w-2/5 flex flex-col items-center p-2">
+                <IncomeDonut />
+                <p className="text-3xl p-2 text-[#C6F4B0] font-bold">700€</p>
+              </div>
+            </div>
+            <div className="bg-white bg-opacity-25 rounded-xl mr-5 mt-10 p-5 flex justify-center">
+              <div className="w-3/4">
+                <RecapBar />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <Form/>
+            </div>
+            <div className="bg-white bg-opacity-25 rounded-xl ml-5 p-2">
+              <TransactionList />
+            </div>
+          </div>
+        </section>
+        {displayForm && <FormScreen />}
       </div>
-      <div className="recap">
-        <div className="xs:w-1/2 lg:w-1/4">
-       <SpendDonut />
-       </div>
-       <div className="xs:w-1/2 lg:w-1/4">
-      <IncomeDonut />
-      </div>
-      </div>
-      
-      {displayForm && 
-     
-        <FormScreen />
-      
-      }
-      </div>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }
