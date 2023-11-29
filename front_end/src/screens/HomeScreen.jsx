@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-
 import { UserContext } from "../Context/UserContext";
 
 import FormScreen from "./FormScreen";
@@ -34,9 +33,9 @@ export default function HomeScreen() {
       </div>
       
       {displayForm && 
-      <div className="slideInUp z-10 absolute bottom-20 transform -translate-x-[-4%]">
+     
         <FormScreen />
-      </div>
+      
       }
       </div>
       <Footer/>

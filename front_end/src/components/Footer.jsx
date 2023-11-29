@@ -4,7 +4,7 @@ import ButtonAdd from './ButtonAdd';
 
 const Footer = () => {
     return (
-        <footer className='sticky bottom-0 h-[10%]'>
+        <footer className='lg:hidden sticky bottom-0 h-[10%]'>
             <div className="flex justify-evenly bg-opacity-25 bg-white p-3">
                 <button><img src='/home.svg' alt="home" /></button>
                 <ButtonAdd/>

@@ -24,7 +24,7 @@ export default function FormScreen() {
 
   return (
     
-      <section className="xl:w-96 xs:h-3/4 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl">
+      <section className="ml-4 mb-4 xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 absolute bottom-20 transform -translate-x-[0%]">
         <div className="relative p-12 rounded-md">
           <div className="inset-y-0 left-0 flex-col items-center p-3">
 
