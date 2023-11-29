@@ -17,8 +17,8 @@ const DateButton = () => {
     const month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(currentDate);
 
     dates.unshift(
-      <div key={i} className='lg:flex lg:m-2 lg:ml-5 '>
-        <div className='m-2 pb-4'>
+      <div key={i} className='lg:flex lg:ml-5 '>
+        <div className='m-2'>
         <button className="p-4 w-20 bg-opacity-20 bg-white rounded-xl" style={{ whiteSpace: 'pre-line', margin: '2%', color: 'white' }}>
           {`${dayOfWeek}\n${dayOfMonth}\n${month}`}
         </button>

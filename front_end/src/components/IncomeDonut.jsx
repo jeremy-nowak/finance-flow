@@ -12,13 +12,12 @@ export default function IncomeDonut() {
         const ctx = document.getElementById('incomeChart');
 
         if (ctx) {
-            // Check if there is an existing Chart instance and destroy it
             const existingChart =Chart.getChart(ctx);
             if (existingChart) {
                 existingChart.destroy();
             }
 
-            // Create a new Chart instance for incomes
+            
             const newChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
@@ -35,13 +34,17 @@ export default function IncomeDonut() {
                         hoverOffset: 4
                     }]
                 },
+                options:{
+                    color : "white",
+                    responsive: true,
+                    
+                }
             });
         }
-    }, [user]); // Re-run the effect when the user data changes
-
+    }, [user]); 
     return (
-        <div>
-            <canvas id="incomeChart" width="180" height="180"></canvas>
-        </div>
+        
+            <canvas id="incomeChart"></canvas>
+        
     );
 }
