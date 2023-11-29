@@ -9,7 +9,6 @@ import IncomeDonut from "../components/IncomeDonut";
 import DateButton from "../components/DateButton";
 import TransactionList from "../components/TransactionList";
 import RecapBar from "../components/RecapBar";
-import Form from "../components/Form";
 
 export default function HomeScreen() {
   const { user, displayForm } = useContext(UserContext);
@@ -17,9 +16,8 @@ export default function HomeScreen() {
   return (
     <div>
       <div>
-
         <div className="flex justify-between p-5 items-center m-5">
-          <h2 className="text-white text-2xl">Bonjour {user}</h2>
+          <h2 className="text-white text-2xl">Bonjour {user.login}</h2>
           <DecoButton />
         </div>
 
@@ -47,7 +45,7 @@ export default function HomeScreen() {
           </div>
           <div>
             <div>
-              <Form/>
+              <FormScreen />
             </div>
             <div className="bg-white bg-opacity-25 rounded-xl ml-5 p-2">
               <TransactionList />

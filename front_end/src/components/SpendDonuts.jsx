@@ -13,36 +13,32 @@ export default function SpendDonut() {
   useEffect(() => {
     const ctx = document.getElementById("spendChart");
 
+    if (ctx) {
+      const existingChart = Chart.getChart(ctx);
+      if (existingChart) {
+        existingChart.destroy();
+      }
 
-            // Create a new Chart instance
-            const newChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Essential', 'Loisirs', 'Epargne', 'Autres'],
-                    datasets: [{
-                        label: 'Spend',
-                        data: [data.solde, 400, 1000, 520],
-                        backgroundColor: [
-                            '#7B0828',
-                            '#00A878',
-                            '#FFC759',
-                            '#79ADDC',
-                            
-                        ],
-                        hoverOffset: 4
-                    }]
-                },
-                options:{
-                    color : "white"
-                }
-                
-            });
-        }
-    }, []); // The empty dependency array ensures that this effect runs once after the initial render
+      // Create a new Chart instance
+      const newChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Essential", "Loisirs", "Epargne", "Autres"],
+          datasets: [
+            {
+              label: "Spend",
+              data: [data.solde, 400, 1000, 520],
+              backgroundColor: ["#7B0828", "#00A878", "#FFC759", "#79ADDC"],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          color: "white",
+        },
+      });
+    }
+  }, []); // The empty dependency array ensures that this effect runs once after the initial render
 
-    return (
-       
-            <canvas id="spendChart"></canvas>
-        
-    );
+  return <canvas id="spendChart"></canvas>;
 }

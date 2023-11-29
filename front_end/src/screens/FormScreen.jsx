@@ -22,37 +22,40 @@ export default function FormScreen() {
     setOptions(spend);
   }, [categ]);
 
+  useEffect(() => {
+    console.log("options", options);
+  }, [options]);
+
   return (
-    
-      <section className="ml-4 mb-4 xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 absolute bottom-20 transform -translate-x-[0%]">
-        <div className="relative p-12 rounded-md">
-          <div className="inset-y-0 left-0 flex-col items-center p-3">
+    <section className="ml-4 mb-4 xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 absolute bottom-20 transform -translate-x-[0%]">
+      <div className="relative p-12 rounded-md">
+        <div className="inset-y-0 left-0 flex-col items-center p-3">
+          <DisplaySolde />
 
-            <DisplaySolde />
-
-            <div className="flex justify-around">
-              <button className="bg-[#C6F4B0] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#A7E78D]"
-                onClick={() => {
-                  setTitle("Income"), setType("credit"), changeOptions("credit");
-                }}
-              >
-                Inc
-              </button>
-              <button className="bg-[#FF9393] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#FF6F6F]"
-                onClick={() => {
-                  setTitle("Spend"), setType("debit"), changeOptions("debit");
-                }}
-              >
-                Out
-              </button>
-            </div>
-            <div className="flex flex-col items-center">
-              <h1 className="text-3xl mb-2 self-center text-black">{title}</h1>
-              <Form options={options} type={type} />
-            </div>
+          <div className="flex justify-around">
+            <button
+              className="bg-[#C6F4B0] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#A7E78D]"
+              onClick={() => {
+                setTitle("Income"), setType("credit"), changeOptions("credit");
+              }}
+            >
+              Inc
+            </button>
+            <button
+              className="bg-[#FF9393] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#FF6F6F]"
+              onClick={() => {
+                setTitle("Spend"), setType("debit"), changeOptions("debit");
+              }}
+            >
+              Out
+            </button>
+          </div>
+          <div className="flex flex-col items-center">
+            <h1 className="text-3xl mb-2 self-center text-black">{title}</h1>
+            <Form options={options} type={type} />
           </div>
         </div>
-      </section>
-   
+      </div>
+    </section>
   );
 }
