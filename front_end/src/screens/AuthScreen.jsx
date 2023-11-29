@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 
-
 export default function AuthScreen() {
   // ________________________
   // Variables
@@ -97,7 +96,8 @@ export default function AuthScreen() {
       body: data,
     });
 
-    const text = await response.text();
+    const text = await response.json();
+    console.log("text", text.id_user);
     if (text === "Veuillez remplir tous les champs") {
       setErrorConnection({
         ...errorConnection,
@@ -110,15 +110,16 @@ export default function AuthScreen() {
         login: text,
         password: text,
       });
-    } else if (text === "ok") {
+    } else if (text.id_user) {
       setErrorConnection({
         ...errorConnection,
         login: null,
         password: null,
       });
-      setUser(connexion.login);
-      // mettre le login dans le local storage
-      localStorage.setItem("login", connexion.login);
+      setUser(text);
+      // mettre le login et l'id dans le local storage
+      localStorage.setItem("login", text.login);
+      localStorage.setItem("id_user", text.id_user);
       setConnexion({
         ...connexion,
         login: "",
@@ -258,12 +259,8 @@ export default function AuthScreen() {
     }
   };
 
-  useEffect(() => {
-    console.log("signUp", signUp);
-  }, [signUp]);
-
   return (
-    <div className="flex xs:justify-end xs:items-end lg:justify-center lg:items-center h-screen">
+
       <div className="xs:h-1/2" >
       </div>
       <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">
@@ -275,6 +272,7 @@ export default function AuthScreen() {
             <form action="" method="post">
               <div className="relative p-12 rounded-md">
                 <div className="inset-y-0 left-0 flex-col items-center p-3">
+
 
                   <label className="block text-xl font-medium leading-6 text-white mb-2">
                     Login
@@ -315,6 +313,7 @@ export default function AuthScreen() {
                     }}
                   />
                   {errorRegister.password && (
+
                     <p className="text-white mb-2">{errorRegister.password} (mot de passe)</p>
                   )}
                   <label className="block text-xl font-medium leading-6 text-white mb-2">
@@ -336,6 +335,7 @@ export default function AuthScreen() {
                     }}
                   />
                   {errorRegister.confirmation && (
+
                     <p className="text-white mb-2">{errorRegister.confirmation} (confirmation)</p>
                   )}
                   <input
@@ -346,6 +346,7 @@ export default function AuthScreen() {
                   />
 
                   <div className="flex justify-center mt-9">
+
                     <p className="text-white">Already a member ? <span onClick={(e) => {
                       e.preventDefault();
                       setSignUp(!signUp)
@@ -422,6 +423,7 @@ export default function AuthScreen() {
               </div>
             </form>
 
+
           </div>
 
         }
@@ -429,4 +431,3 @@ export default function AuthScreen() {
     </div>
   );
 }
-
