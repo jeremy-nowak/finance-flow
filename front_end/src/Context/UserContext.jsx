@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
     solde: null,
   });
   const [data, setData] = useState({});
+  const [monthlyData, setMonthlyData] = useState([]);
   const [connected, setConnected] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -27,6 +28,22 @@ const UserProvider = ({ children }) => {
       const res = await response.json();
       if (res) {
         setData(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      let data = new FormData();
+      data.append("user", user.login);
+      data.append("context", "fetchMonthly");
+
+      const response = await fetch(`${PATH}controller/authController.php`, {
+        method: "POST",
+        body: data,
+      });
+      const res = await response.json();
+      if (res) {
+        setMonthlyData(res);
       }
     } catch (err) {
       console.log(err);
@@ -68,6 +85,7 @@ const UserProvider = ({ children }) => {
         user,
         setUser,
         data,
+        monthlyData,
         connected,
         setConnected,
         handleLogout,

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import { useContext } from "react";
 
@@ -7,8 +7,31 @@ import { UserContext } from "../Context/UserContext";
 import DisplaySolde from "../components/DisplaySolde";
 
 export default function SpendDonut() {
-  const { user } = useContext(UserContext);
-  const { data } = useContext(UserContext);
+  const { user, data, monthlyData } = useContext(UserContext);
+  console.log(monthlyData);
+  const [debit, setDebit] = useState([]);
+
+  const getDebit = () => {
+    // on map sur monthlyData pour récupérer toutes les transactions pour lesquelles le type est debit
+    const debit = monthlyData.map((transaction) => {
+      if (transaction.type == "debit") {
+        return transaction;
+      }
+    });
+    // on filtre le tableau pour supprimer les undefined
+    debit.filter((transaction) => transaction != undefined);
+    // on set le state debit avec le tableau filtré
+
+    setDebit(debit);
+  };
+
+  useEffect(() => {
+    getDebit();
+  }, [monthlyData]);
+
+  useEffect(() => {
+    console.log("débit", debit);
+  }, [debit]);
 
   useEffect(() => {
     const ctx = document.getElementById("spendChart");
