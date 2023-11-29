@@ -23,6 +23,23 @@ class Transaction extends Database
             ':category' => $category,
             ':id_user' => $userId
         ]);
+
+        // update de la colonne "solde" dans la table user à l'aide du $amount et du $type ainsi que de l'id_user
+        // si $type = "debit" alors $amount est soustrait à la colonne "solde"
+        // si $type = "credit" alors $amount est ajouté à la colonne "solde"
+        if ($type == "debit") {
+            $sql2 = "UPDATE `users` SET `solde`= solde - :amount WHERE `id_user` = :id_user";
+        } else if ($type == "credit") {
+            $sql2 = "UPDATE `users` SET `solde`= solde + :amount WHERE `id_user` = :id_user";
+        }
+        $prepare2 = $this->bdd->prepare($sql2);
+        $prepare2->execute([
+            ':amount' => $amount,
+            ':id_user' => $userId
+        ]);
+
+
+
         echo json_encode("Transaction ajoutée");
     }
 

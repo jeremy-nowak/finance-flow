@@ -116,10 +116,15 @@ export default function AuthScreen() {
         login: null,
         password: null,
       });
-      setUser(text);
+      setUser({
+        login: text.login,
+        id_user: text.id_user,
+        solde: text.solde,
+      });
       // mettre le login et l'id dans le local storage
       localStorage.setItem("login", text.login);
       localStorage.setItem("id_user", text.id_user);
+      localStorage.setItem("solde", text.solde);
       setConnexion({
         ...connexion,
         login: "",

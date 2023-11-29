@@ -6,11 +6,11 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     login: null,
     id_user: null,
+    solde: null,
   });
   const [data, setData] = useState({});
   const [connected, setConnected] = useState(false);
-  const [ displayForm, setDisplayForm ] = useState(false);
-
+  const [displayForm, setDisplayForm] = useState(false);
 
   const PATH = import.meta.env.VITE_PATH;
 
@@ -38,6 +38,7 @@ const UserProvider = ({ children }) => {
     setConnected(false);
     localStorage.removeItem("login");
     localStorage.removeItem("id_user");
+    localStorage.removeItem("solde");
   };
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const UserProvider = ({ children }) => {
       setUser({
         login: localStorage.getItem("login"),
         id_user: localStorage.getItem("id_user"),
+        solde: localStorage.getItem("solde"),
       });
 
       setConnected(true);
@@ -62,7 +64,16 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, data, connected, setConnected, handleLogout, displayForm, setDisplayForm }}
+      value={{
+        user,
+        setUser,
+        data,
+        connected,
+        setConnected,
+        handleLogout,
+        displayForm,
+        setDisplayForm,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 
 export default function Form({ options, type }) {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [errorsBool, setErrorsBool] = useState({
     amount: true,
     title: true,
@@ -21,6 +21,13 @@ export default function Form({ options, type }) {
   const [change, setChange] = useState(false);
 
   const resetForm = (form) => {
+    // mettre le solde à jour
+    if (type == "credit") {
+      setUser({ ...user, solde: user.solde + parseInt(form.amount.value) });
+    } else if (type == "debit") {
+      setUser({ ...user, solde: user.solde - parseInt(form.amount.value) });
+    }
+
     form.reset();
     setErrorsBool({
       amount: true,
