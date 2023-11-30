@@ -1,12 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
-
 import FormScreen from "./FormScreen";
 import DecoButton from "../components/DecoButton";
 import Footer from "../components/Footer";
 import SpendDonut from "../components/SpendDonuts";
 import IncomeDonut from "../components/IncomeDonut";
-import DateButton from "../components/DateButton";
+// import DateButton from "../components/DateButton";
 import TransactionList from "../components/TransactionList";
 import RecapBar from "../components/RecapBar";
 
@@ -32,9 +31,9 @@ export default function HomeScreen() {
           <DecoButton />
         </div>
 
-        <div className="m-10 bg-white bg-opacity-25 rounded-xl">
+        {/* <div className="m-10 bg-white bg-opacity-25 rounded-xl">
           <DateButton />
-        </div>
+        </div> */}
 
         <section className="m-10 flex flex-row">
           <div className="w-full">
@@ -60,9 +59,9 @@ export default function HomeScreen() {
             </div>
           </div>
           <div>
-            <div>
+            {/* <div>
               <FormScreen />
-            </div>
+            </div> */}
             <div className="bg-white bg-opacity-25 rounded-xl ml-5 p-2">
               <TransactionList />
             </div>
