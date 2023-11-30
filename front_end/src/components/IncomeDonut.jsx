@@ -82,9 +82,9 @@ export default function IncomeDonut({ totalIncome, setTotalIncome }) {
   useEffect(() => {
     setTotalIncome(
       soldeLabels.salary +
-        soldeLabels.transfert +
-        soldeLabels.interest +
-        soldeLabels.other
+      soldeLabels.transfert +
+      soldeLabels.interest +
+      soldeLabels.other
     );
   }, [soldeLabels]);
 
@@ -119,6 +119,20 @@ export default function IncomeDonut({ totalIncome, setTotalIncome }) {
         options: {
           color: "white",
           responsive: true,
+          plugins: {
+            legend: {
+              display: true,
+              title: {
+                display: false, 
+              },
+              labels: {
+                boxWidth: 20,
+                font: {
+                  size: 12, 
+                },
+              },
+            },
+          },
         },
       });
     }
@@ -126,7 +140,7 @@ export default function IncomeDonut({ totalIncome, setTotalIncome }) {
   return (
     <>
       <canvas id="incomeChart"></canvas>
-      <p className="text-3xl p-2 text-[#C6F4B0] font-bold">{totalIncome}€</p>
+      <p className="text-3xl p-2 mt-5 text-[#C6F4B0] font-bold">{totalIncome}€</p>
     </>
   );
 }

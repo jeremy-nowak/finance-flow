@@ -22,20 +22,26 @@ export default function FormScreen({ setRerender }) {
     setOptions(spend);
   }, [categ]);
 
-  return (
-    <section className="ml-4 mb-4 xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 absolute bottom-20 transform -translate-x-[0%]">
-      <div className="relative p-12 rounded-md">
-        <div className="inset-y-0 left-0 flex-col items-center p-3">
-          <DisplaySolde />
+  let titleStyle = title === "Income" ? "text-[#C6F4B0]" : "text-[#FF9393]";
+  titleStyle += " text-5xl mb-5 self-center";
 
-          <div className="flex justify-around">
+  return (
+    <section className="xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 transform -translate-x-[0%]">
+      <div className="flex justify-end p-5">
+        <button>Fermer</button>
+        </div>
+      <div className="relative p-2 rounded-md">
+        <div className="inset-y-0 left-0 flex flex-col items-center p-3">
+          <p className="text-3xl mb-5"><DisplaySolde /></p>
+
+          <div className="flex w-full justify-around mb-5">
             <button
               className="bg-[#C6F4B0] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#A7E78D]"
               onClick={() => {
                 setTitle("Income"), setType("credit"), changeOptions("credit");
               }}
             >
-              Inc
+              Income
             </button>
             <button
               className="bg-[#FF9393] text-black rounded-md px-3 py-2 mb-2 hover:bg-[#FF6F6F]"
@@ -43,11 +49,11 @@ export default function FormScreen({ setRerender }) {
                 setTitle("Spend"), setType("debit"), changeOptions("debit");
               }}
             >
-              Out
+              Spend
             </button>
           </div>
           <div className="flex flex-col items-center">
-            <h1 className="text-3xl mb-2 self-center text-black">{title}</h1>
+            <h3 className={titleStyle}>{title}</h3>
             <Form options={options} type={type} />
           </div>
         </div>

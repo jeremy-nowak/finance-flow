@@ -5,9 +5,9 @@ function DisplaySolde() {
   const { data, user } = useContext(UserContext);
 
   return (
-    <div className="flex justify-center mb-4">
-      <h1 className="text-black text-5xl">{data.solde}</h1>
-    </div>
+    <>
+      {data.solde}€
+    </>
   );
 }
 export default DisplaySolde;
