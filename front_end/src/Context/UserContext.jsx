@@ -10,6 +10,7 @@ const UserProvider = ({ children }) => {
   });
   const [data, setData] = useState({});
   const [monthlyData, setMonthlyData] = useState([]);
+  const [yearlyData, setYearlyData] = useState([]);
   const [connected, setConnected] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -44,6 +45,22 @@ const UserProvider = ({ children }) => {
       const res = await response.json();
       if (res) {
         setMonthlyData(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      let data = new FormData();
+      data.append("user", user.login);
+      data.append("context", "fetchYearly");
+
+      const response = await fetch(`${PATH}controller/authController.php`, {
+        method: "POST",
+        body: data,
+      });
+      const res = await response.json();
+      if (res) {
+        setYearlyData(res);
       }
     } catch (err) {
       console.log(err);
@@ -86,6 +103,7 @@ const UserProvider = ({ children }) => {
         setUser,
         data,
         monthlyData,
+        yearlyData,
         connected,
         setConnected,
         handleLogout,

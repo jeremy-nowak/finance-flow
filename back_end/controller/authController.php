@@ -32,6 +32,10 @@ if (isset($_POST["context"])) {
         $login = htmlspecialchars($_POST["user"]);
         $monthlyData = $user->monthlyData($login);
         echo json_encode($monthlyData);
+    } else if ($_POST["context"] == "fetchYearly") {
+        $login = htmlspecialchars($_POST["user"]);
+        $yearlyData = $user->yearlyData($login);
+        echo json_encode($yearlyData);
     }
 }
 

@@ -138,4 +138,20 @@ class User extends Database
             return false;
         }
     }
+
+    public function yearlyData($login)
+    {
+        // on récupère toutes les transactions de l'utilisateur pour le mois en cours avec le nom de la catégorie
+        $sql = "SELECT transaction.*, category.name FROM `transaction` INNER JOIN `category` ON transaction.id_categ = category.id_category WHERE `id_user` = (SELECT id_user FROM `users` WHERE `login` = :login) AND YEAR(`date`) = YEAR(CURRENT_DATE()) ORDER BY `date` DESC";
+
+        $prepare = $this->bdd->prepare($sql);
+        $prepare->execute([':login' => $login]);
+        $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
