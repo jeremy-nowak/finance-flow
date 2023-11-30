@@ -3,7 +3,6 @@ import { UserContext } from "../Context/UserContext";
 
 function DisplaySolde() {
   const { data, user } = useContext(UserContext);
-  console.log(user);
 
   return (
     <div className="flex justify-center mb-4">

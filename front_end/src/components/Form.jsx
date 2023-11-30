@@ -4,7 +4,6 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 
 export default function Form({ options, type }) {
-  //   console.log(options);
   const { user, setUser } = useContext(UserContext);
   const [errorsBool, setErrorsBool] = useState({
     amount: true,

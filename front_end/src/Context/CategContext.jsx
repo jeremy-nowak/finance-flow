@@ -71,12 +71,6 @@ const CategProvider = ({ children }) => {
       {children}
     </CategContext.Provider>
   );
-
-  return (
-    <CategContext.Provider value={{ categ, setCateg }}>
-      {children}
-    </CategContext.Provider>
-  );
 };
 
 export default CategProvider;

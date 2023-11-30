@@ -101,7 +101,7 @@ class User extends Database
 
     public function context($login)
     {
-        // on récupère toutes les données de l'utilisateur (sauf le mot de passe), ses transactions, et les catégories de ses transactions
+        // on récupère toutes les données de l'utilisateur (sauf le mot de passe), ses transactions, et les catégories de ses transactions pour le mois en cours
         $sql = "SELECT users.login, users.solde, transaction.*, category.* FROM `users` INNER JOIN `transaction` ON users.id_user = transaction.id_user INNER JOIN `category` ON transaction.id_categ = category.id_category WHERE `login` = :login";
 
         // récup le user
@@ -120,6 +120,22 @@ class User extends Database
             $prepare2->execute([':login' => $login]);
             $result2 = $prepare2->fetch(PDO::FETCH_ASSOC);
             return $result2;
+        }
+    }
+
+    public function monthlyData($login)
+    {
+        // on récupère toutes les transactions de l'utilisateur pour le mois en cours avec le nom de la catégorie
+        $sql = "SELECT transaction.*, category.name FROM `transaction` INNER JOIN `category` ON transaction.id_categ = category.id_category WHERE `id_user` = (SELECT id_user FROM `users` WHERE `login` = :login) AND MONTH(`date`) = MONTH(CURRENT_DATE()) AND YEAR(`date`) = YEAR(CURRENT_DATE()) ORDER BY `date` DESC";
+
+        $prepare = $this->bdd->prepare($sql);
+        $prepare->execute([':login' => $login]);
+        $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
         }
     }
 }

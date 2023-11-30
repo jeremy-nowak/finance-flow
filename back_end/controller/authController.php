@@ -24,9 +24,15 @@ if (isset($_POST["connection"])) {
 
 //    Context
 if (isset($_POST["context"])) {
-    $login = htmlspecialchars($_POST["user"]);
-    $data = $user->context($login);
-    echo json_encode($data);
+    if ($_POST["context"] == "fetchUser") {
+        $login = htmlspecialchars($_POST["user"]);
+        $data = $user->context($login);
+        echo json_encode($data);
+    } else if ($_POST["context"] == "fetchMonthly") {
+        $login = htmlspecialchars($_POST["user"]);
+        $monthlyData = $user->monthlyData($login);
+        echo json_encode($monthlyData);
+    }
 }
 
 //    Register
