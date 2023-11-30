@@ -120,6 +120,22 @@ export default function SpendDonut({ totalSpend, setTotalSpend }) {
         },
         options: {
           color: "white",
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true,
+              title: {
+                display: false,
+              },
+              labels: {
+                boxWidth: 20,
+                font: {
+                  size: 12,
+                },
+               
+              },
+            },
+          },
         },
       });
     }
@@ -128,7 +144,7 @@ export default function SpendDonut({ totalSpend, setTotalSpend }) {
   return (
     <>
       <canvas id="spendChart"></canvas>
-      <p className="text-3xl p-2 text-[#FF9393] font-bold">{totalSpend}€</p>
+      <p className="text-3xl p-2 mt-5 text-[#FF9393] font-bold">{totalSpend}€</p>
     </>
   );
 }

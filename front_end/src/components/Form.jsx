@@ -122,7 +122,7 @@ export default function Form({ options, type }) {
             })
           : null}
       </select>
-      <label className="block text-xl font-medium leading-6 text-black mb-2">
+      <label className="block text-xl font-medium leading-6 text-black mb-2 mt-5">
         Montant
       </label>
       <input
@@ -135,7 +135,7 @@ export default function Form({ options, type }) {
         onBlur={(e) => checkEmpty(e)}
       />
       {errorsBool.amount ? <p>{errors.amount}</p> : null}
-      <label className="block text-xl font-medium leading-6 text-black mb-2">
+      <label className="block text-xl font-medium leading-6 text-black mb-2 mt-5">
         Titre
       </label>
       <input
@@ -147,7 +147,7 @@ export default function Form({ options, type }) {
         onBlur={(e) => checkEmpty(e)}
       />
       {errorsBool.title ? <p>{errors.title}</p> : null}
-      <label className="block text-xl font-medium leading-6 text-black mb-2">
+      <label className="block text-xl font-medium leading-6 text-black mb-2 mt-5">
         Date
       </label>
       <input
@@ -161,7 +161,7 @@ export default function Form({ options, type }) {
       {errorsBool.date ? <p>{errors.date}</p> : null}
       <input type="hidden" name="type" value={type} />
       <input
-        className="block w-full rounded-md border-0 bg-white py-1.5 text-xl text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6"
+        className="block w-full rounded-md border-0 bg-white py-1.5 text-xl text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mt-5"
         type="submit"
         onClick={(e) => handleSubmit(e)}
         disabled={errorsBool.form}
