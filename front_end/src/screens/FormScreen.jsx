@@ -3,7 +3,7 @@ import { CategContext } from "../Context/CategContext";
 import DisplaySolde from "../components/DisplaySolde";
 import Form from "../components/Form";
 
-export default function FormScreen() {
+export default function FormScreen({ setRerender }) {
   const [title, setTitle] = useState("Spend");
   const { categ } = useContext(CategContext);
   const { income, spend } = categ;

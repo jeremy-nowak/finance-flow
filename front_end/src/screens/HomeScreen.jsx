@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 
 import FormScreen from "./FormScreen";
@@ -12,6 +12,17 @@ import RecapBar from "../components/RecapBar";
 
 export default function HomeScreen() {
   const { user, displayForm } = useContext(UserContext);
+  const [totalSpend, setTotalSpend] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const getTotals = () => {
+    setTotal(totalIncome - totalSpend);
+  };
+
+  useEffect(() => {
+    getTotals();
+  }, [totalIncome, totalSpend]);
 
   return (
     <div>
@@ -29,12 +40,17 @@ export default function HomeScreen() {
           <div className="w-full">
             <div className="flex flex-row bg-white bg-opacity-25 rounded-xl justify-evenly mr-5">
               <div className="w-2/5 flex flex-col items-center p-2">
-                <SpendDonut />
-                <p className="text-3xl p-2 text-[#FF9393] font-bold">600€</p>
+                <SpendDonut
+                  totalSpend={totalSpend}
+                  setTotalSpend={setTotalSpend}
+                />
               </div>
+              <p>Month's total: {total}€</p>
               <div className="w-2/5 flex flex-col items-center p-2">
-                <IncomeDonut />
-                <p className="text-3xl p-2 text-[#C6F4B0] font-bold">700€</p>
+                <IncomeDonut
+                  totalIncome={totalIncome}
+                  setTotalIncome={setTotalIncome}
+                />
               </div>
             </div>
             <div className="bg-white bg-opacity-25 rounded-xl mr-5 mt-10 p-5 flex justify-center">
