@@ -5,8 +5,8 @@ export default function RecapBar() {
     const chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40, 12, 45, 78, 98, 45],
+            label: 'Total',
+            data: [65, 59, -180, 181, 56, -55, 40, 12, -45, 78, 98, 45],
             backgroundColor: [
                 'rgba(255, 99, 132,)',
                 'rgba(255, 159, 64,)',

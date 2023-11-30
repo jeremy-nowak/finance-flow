@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 
 import { UserContext } from "./Context/UserContext";
 import "./App.css";
