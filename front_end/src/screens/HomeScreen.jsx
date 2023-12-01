@@ -81,9 +81,9 @@ export default function HomeScreen() {
             </div>
           </div>
 
-          {/* <div>
+          <div>
               <FormScreen />
-            </div> */}
+            </div>
           <div>
             <div className="lg:flex xs:hidden flex-col bg-white bg-opacity-25 rounded-xl ml-5 p-2 mb-5">
               <p className="text-white text-3xl p-5">Total</p>
