@@ -7,7 +7,7 @@ abstract class Database
     public function __construct()
     {
         try {
-            $this->bdd = new PDO('mysql:host=localhost;dbname=finance_flow;charset=utf8', 'root', '');
+            $this->bdd = new PDO('mysql:host=localhost;dbname=finance_flow;charset=utf8', 'root', 'root');
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         } catch (PDOException $e) {

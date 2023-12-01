@@ -24,21 +24,7 @@ export default function TransactionList() {
             />
           );
         })}
-        {/* <Transaction
-          Category="shopping"
-          Pill="income"
-          Date="03/12/2023"
-          Title="Anniversaire"
-          Amount="233"
-        />
-
-        <Transaction
-          Category="shopping"
-          Pill="spend"
-          Date="03/12/2023"
-          Title="Anniversaire"
-          Amount="233"
-        /> */}
+       
       </div>
     </div>
   );
