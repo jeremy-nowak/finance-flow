@@ -3,7 +3,7 @@ import { CategContext } from "../Context/CategContext";
 import DisplaySolde from "../components/DisplaySolde";
 import Form from "../components/Form";
 
-export default function FormScreen() {
+export default function FormDescktopScreen() {
   const [title, setTitle] = useState("Spend");
   const { categ } = useContext(CategContext);
   const { income, spend } = categ;
@@ -27,9 +27,6 @@ export default function FormScreen() {
 
   return (
     <section className="xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 transform -translate-x-[0%]">
-      <div className="flex justify-end p-5">
-        <button>Fermer</button>
-      </div>
       <div className="relative p-2 rounded-md">
         <div className="inset-y-0 left-0 flex flex-col items-center p-3">
           <p className="text-3xl mb-5">
