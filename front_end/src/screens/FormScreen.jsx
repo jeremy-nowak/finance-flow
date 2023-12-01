@@ -33,7 +33,7 @@ export default function FormScreen() {
       <div className="flex justify-end p-5">
       <button onClick={()=>{
                 setDisplayForm(false)
-            }}><img src='/close.svg' alt="plus" /></button>
+            }}><img src='/close.svg' alt="close" /></button>
       </div>
       <div className="relative p-2 rounded-md">
         <div className="inset-y-0 left-0 flex flex-col items-center p-3">
