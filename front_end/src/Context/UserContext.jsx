@@ -11,12 +11,14 @@ const UserProvider = ({ children }) => {
   const [data, setData] = useState({});
   const [monthlyData, setMonthlyData] = useState([]);
   const [yearlyData, setYearlyData] = useState([]);
+  const [latestTransactions, setLatestTransactions] = useState([]);
   const [connected, setConnected] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
 
   const PATH = import.meta.env.VITE_PATH;
 
   const fetchUser = async () => {
+    // on récupère les données de l'utilisateur
     try {
       let data = new FormData();
       data.append("user", user.login);
@@ -33,6 +35,7 @@ const UserProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+    // fetch monthly data
     try {
       let data = new FormData();
       data.append("user", user.login);
@@ -49,6 +52,7 @@ const UserProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+    // fetch yearly data
     try {
       let data = new FormData();
       data.append("user", user.login);
@@ -67,6 +71,28 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  const fetchLatestTransactions = async () => {
+    try {
+      let data = new FormData();
+      data.append("id_user", user.id_user);
+      data.append("getLatestTransactions", "getLatestTransactions");
+
+      const response = await fetch(
+        `${PATH}controller/transactionController.php`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const res = await response.json();
+      if (res) {
+        setLatestTransactions(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleLogout = () => {
     setUser(null);
     setConnected(false);
@@ -78,6 +104,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       fetchUser();
+      fetchLatestTransactions();
     } else {
       setData({});
     }
@@ -104,6 +131,7 @@ const UserProvider = ({ children }) => {
         data,
         monthlyData,
         yearlyData,
+        latestTransactions,
         connected,
         setConnected,
         handleLogout,

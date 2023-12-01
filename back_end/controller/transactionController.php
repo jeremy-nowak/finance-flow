@@ -25,3 +25,10 @@ if (isset($_POST["form"])) {
         echo "Veuillez remplir tous les champs";
     }
 }
+
+//    __________________________________________________
+//    Récupération des 5 dernières transactions
+if (isset($_POST["getLatestTransactions"])) {
+    $userId = htmlspecialchars($_POST["id_user"]);
+    echo json_encode($transaction->getLatestTransactions($userId));
+}

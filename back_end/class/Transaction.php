@@ -43,6 +43,18 @@ class Transaction extends Database
         echo json_encode("Transaction ajoutée");
     }
 
+    public function getLatestTransactions($userId)
+    {
+        //récupérer le nom des catégories avec un alias "category"
+        $sql = "SELECT transaction.*, category.name AS category FROM `transaction` INNER JOIN category ON transaction.id_categ = category.id_category WHERE `id_user` = :id_user ORDER BY `date` DESC LIMIT 6";
+        $prepare = $this->bdd->prepare($sql);
+        $prepare->execute([
+            ':id_user' => $userId
+        ]);
+        $data = $prepare->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
     // public function getTransactions($userId)
     // {
     //     $sql = "SELECT * FROM `transactions` WHERE `id_user` = :id_user";
