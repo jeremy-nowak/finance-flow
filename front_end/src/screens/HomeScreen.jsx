@@ -61,6 +61,7 @@ export default function HomeScreen() {
           </div>
         </div>
 
+
         <section className="lg:m-10 xs:m-5 flex lg:flex-row xs:flex-col">
           <div className="w-full">
             <div className="flex flex-col bg-white bg-opacity-25 rounded-xl">
@@ -98,10 +99,6 @@ export default function HomeScreen() {
             </div>
           </div>
 
-          <div>
-
-            <FormDesktopScreen />
-          </div>
 
           <div>
             <div className="lg:flex xs:hidden flex-col bg-white bg-opacity-25 rounded-xl ml-5 p-2 mb-5">
@@ -112,6 +109,9 @@ export default function HomeScreen() {
                 </p>
               </div>
             </div>
+            <div>
+              <FormDesktopScreen />
+            </div>
             <div className="bg-white bg-opacity-25 rounded-xl lg:ml-5 p-2">
               <TransactionList />
             </div>
@@ -121,7 +121,7 @@ export default function HomeScreen() {
 
         <TransactionsScreen />
 
-        
+
 
       </div>
 
