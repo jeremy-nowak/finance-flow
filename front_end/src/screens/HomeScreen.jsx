@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
-import FormScreen from "./FormScreen";
+import FormDesktopScreen from "./FormDesktopScreen";
 import DecoButton from "../components/DecoButton";
 import Footer from "../components/Footer";
 import SpendDonut from "../components/SpendDonuts";
@@ -17,6 +17,12 @@ export default function HomeScreen() {
   const [totalIncome, setTotalIncome] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
   const getTotals = () => {
     setTotal(totalIncome - totalSpend);
   };
@@ -24,6 +30,15 @@ export default function HomeScreen() {
   useEffect(() => {
     getTotals();
   }, [totalIncome, totalSpend]);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  useEffect(() => {
+    console.log(width);
+  }, [width]);
 
   return (
     <div>
@@ -40,19 +55,21 @@ export default function HomeScreen() {
         <div className="lg:hidden xs:flex flex-col bg-white bg-opacity-25 rounded-xl p-2 m-5">
           <p className="text-white text-3xl p-5">Total</p>
           <div className="flex justify-center">
-            <p className="text-5xl text-white p-2 mb-5"><DisplaySolde /></p>
+            <p className="text-5xl text-white p-2 mb-5">
+              <DisplaySolde />
+            </p>
           </div>
         </div>
 
         <section className="lg:m-10 xs:m-5 flex lg:flex-row xs:flex-col">
           <div className="w-full">
-
             <div className="flex flex-col bg-white bg-opacity-25 rounded-xl">
               <div>
-                <h3 className="text-white lg:text-3xl xs:text-xl p-2 m-5">Monthly Recap</h3>
+                <h3 className="text-white lg:text-3xl xs:text-xl p-2 m-5">
+                  Monthly Recap
+                </h3>
               </div>
               <div className="flex lg:flex-row xs:flex-col justify-around">
-
                 <div className="lg:w-1/3 xs:w-full flex flex-col items-center py-2">
                   <SpendDonut
                     totalSpend={totalSpend}
@@ -82,13 +99,17 @@ export default function HomeScreen() {
           </div>
 
           <div>
-              <FormScreen />
-            </div>
+
+            <FormDesktopScreen />
+          </div>
+
           <div>
             <div className="lg:flex xs:hidden flex-col bg-white bg-opacity-25 rounded-xl ml-5 p-2 mb-5">
               <p className="text-white text-3xl p-5">Total</p>
               <div className="flex justify-center">
-                <p className="text-5xl text-white p-2 mb-5"><DisplaySolde /></p>
+                <p className="text-5xl text-white p-2 mb-5">
+                  <DisplaySolde />
+                </p>
               </div>
             </div>
             <div className="bg-white bg-opacity-25 rounded-xl lg:ml-5 p-2">
@@ -97,9 +118,11 @@ export default function HomeScreen() {
           </div>
         </section>
 
+
         <TransactionsScreen />
 
         
+
       </div>
 
       <Footer />
