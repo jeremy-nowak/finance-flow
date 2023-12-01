@@ -9,6 +9,7 @@ import IncomeDonut from "../components/IncomeDonut";
 import TransactionList from "../components/TransactionList";
 import RecapBar from "../components/RecapBar";
 import DisplaySolde from "../components/DisplaySolde";
+import TransactionsScreen from "./TransactionsScreen";
 
 export default function HomeScreen() {
   const { user, displayForm } = useContext(UserContext);
@@ -73,7 +74,7 @@ export default function HomeScreen() {
               </div>
             </div>
 
-            <div className="bg-white bg-opacity-25 rounded-xl lg:mr-5 lg:mt-10 xs:my-5 p-5 flex justify-center">
+            <div className="bg-white bg-opacity-25 rounded-xl lg:mr-5 lg:mt-10 xs:my-5 p-5 flex justify-center w-full">
               <div className="lg:w-3/4 xs:w-full">
                 <RecapBar />
               </div>
@@ -95,6 +96,8 @@ export default function HomeScreen() {
             </div>
           </div>
         </section>
+
+        <TransactionsScreen />
 
         
       </div>
