@@ -5,6 +5,7 @@ import { UserContext } from "../Context/UserContext";
 export default function TransactionList({
   isMobile = false,
   filteredData = null,
+  setDisplayAll,
 }) {
   const { latestTransactions } = useContext(UserContext);
 
@@ -12,7 +13,8 @@ export default function TransactionList({
     <div>
       {!isMobile ? (
         <>
-          <h2 className="text-white text-3xl p-5">Transactions</h2>
+          <h2 className="text-white text-3xl p-5">Latest Transactions</h2>
+          <button onClick={() => setDisplayAll(true)}>See all...</button>
           <div className="lg:p-2 lg:m-2 flex flex-col items-center">
             {latestTransactions.map((transaction) => {
               return (

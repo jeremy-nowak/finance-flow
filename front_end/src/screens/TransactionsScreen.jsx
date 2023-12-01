@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 import TransactionList from "../components/TransactionList";
 
-export default function TransactionsScreen() {
+export default function TransactionsScreen({ setDisplayAll }) {
   const { yearlyData } = useContext(UserContext);
   const [filter, setFilter] = useState("all");
   const [mobile, setMobile] = useState(false);
@@ -57,7 +57,7 @@ export default function TransactionsScreen() {
   if (isLoading) {
     return (
       <>
-        <button>Retour</button>
+        <button onClick={() => setDisplayAll(false)}>Retour</button>
         <h1>Transactions</h1>
         <h3>Loading...</h3>
       </>
@@ -65,7 +65,7 @@ export default function TransactionsScreen() {
   } else {
     return (
       <>
-        <button>Retour</button>
+        <button onClick={() => setDisplayAll(false)}>Retour</button>
         <h1>Transactions</h1>
         <section className="flex justify-center items-center">
           {/* boutons qui serviront à filtrer grâce à un data */}
