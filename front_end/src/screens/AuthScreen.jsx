@@ -265,11 +265,11 @@ export default function AuthScreen() {
   };
 
   return (
-    <div>
-      <div className="xs:h-1/2"></div>
-      <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-lg xs:rounded-t-2xl">
+    <div className="xs:h-screen flex flex-col lg:justify-center xs:justify-between items-center">
+      <div className="xs:h-1/2 lg:hidden"></div>
+      <section className=" xl:w-96 xs:w-full sm:w-screen bg-opacity-20 bg-white lg:rounded-xl xs:rounded-t-2xl">
         {signUp ? (
-          <div id="inscription" className="h-full">
+          <div id="inscription" className={"h-full"}>
             <h1 className="m-5 text-white text-3xl">Register</h1>
 
             <form action="" method="post">
@@ -282,7 +282,7 @@ export default function AuthScreen() {
                   <input
                     id="login_insc"
                     type="text"
-                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2 "
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2 "
                     value={inscription.login || ""}
                     onChange={(e) => {
                       setInscription({
@@ -304,7 +304,7 @@ export default function AuthScreen() {
                   </label>
                   <input
                     type="password"
-                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
                     value={inscription.password || ""}
                     onChange={(e) => {
                       setInscription({
@@ -327,7 +327,7 @@ export default function AuthScreen() {
                   </label>
                   <input
                     type="password"
-                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
                     value={inscription.confirmation || ""}
                     onChange={(e) => {
                       setInscription({
@@ -380,7 +380,7 @@ export default function AuthScreen() {
                     Login
                   </label>
                   <input
-                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
                     id="login"
                     type="text"
                     value={connexion.login || ""}
@@ -402,7 +402,7 @@ export default function AuthScreen() {
                   <input
                     id="password"
                     type="password"
-                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-4"
                     value={connexion.password || ""}
                     onChange={(e) => {
                       setConnexion({
