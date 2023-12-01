@@ -36,10 +36,6 @@ export default function HomeScreen() {
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  useEffect(() => {
-    console.log(width);
-  }, [width]);
-
   return (
     <div>
       <div>
@@ -99,7 +95,6 @@ export default function HomeScreen() {
           </div>
 
           <div>
-
             <FormDesktopScreen />
           </div>
 
@@ -118,11 +113,7 @@ export default function HomeScreen() {
           </div>
         </section>
 
-
         <TransactionsScreen />
-
-        
-
       </div>
 
       <Footer />
