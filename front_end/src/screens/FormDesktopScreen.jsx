@@ -26,12 +26,9 @@ export default function FormDescktopScreen() {
   titleStyle += " text-5xl mb-5 self-center";
 
   return (
-    <section className="xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 transform -translate-x-[0%]">
+    <section className="lg:flex xs:hidden flex-col bg-white bg-opacity-25 rounded-xl ml-5 p-2 mb-5">
       <div className="relative p-2 rounded-md">
         <div className="inset-y-0 left-0 flex flex-col items-center p-3">
-          <p className="text-3xl mb-5">
-            <DisplaySolde />
-          </p>
 
           <div className="flex w-full justify-around mb-5">
             <button
