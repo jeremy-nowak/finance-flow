@@ -29,7 +29,7 @@ export default function FormScreen() {
   titleStyle += " text-5xl mb-5 self-center";
 
   return (
-    <section className="xl:w-96 xs:h-3/5 sm:w-screen bg-white lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 transform -translate-x-[0%]">
+    <section className="xl:w-96 xs:h-3/5 sm:w-screen bg-gray-100 lg:rounded-lg xs:rounded-t-2xl slideInUp z-10 transform -translate-x-[0%]">
       <div className="flex justify-end p-5">
       <button onClick={()=>{
                 setDisplayForm(false)
