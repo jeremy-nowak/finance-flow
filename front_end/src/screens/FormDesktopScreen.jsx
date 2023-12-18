@@ -48,7 +48,7 @@ export default function FormDescktopScreen() {
               Spend
             </button>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="w-full">
             <h3 className={titleStyle}>{title}</h3>
             <Form options={options} type={type} />
           </div>

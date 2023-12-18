@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 import TransactionList from "../components/TransactionList";
+import Footer from "../components/Footer";
 
 export default function TransactionsScreen({ setDisplayAll }) {
   const { yearlyData } = useContext(UserContext);
@@ -57,27 +58,31 @@ export default function TransactionsScreen({ setDisplayAll }) {
   if (isLoading) {
     return (
       <>
-        <button onClick={() => setDisplayAll(false)}>Retour</button>
+        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="/back.svg" /></button>
         <h1>Transactions</h1>
         <h3>Loading...</h3>
       </>
     );
   } else {
     return (
-      <>
-        <button onClick={() => setDisplayAll(false)}>Retour</button>
-        <h1>Transactions</h1>
-        <section className="flex justify-center items-center">
-          {/* boutons qui serviront à filtrer grâce à un data */}
+      <div className="h-screen">
+        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="/back.svg" /></button>
+        <h1 className="text-white text-bold text-3xl m-5">Transactions</h1>
+        <section className="flex flex-col justify-center items-center">
+            <div>
           <button
-            className="bg-green-500 text-white px-3 py-2 rounded-md mr-3"
+            className="bg-gray-500 text-white px-3 py-2 rounded-md m-3"
             onClick={filterData}
             value="all"
           >
             All
           </button>
+            </div>
+        <div className="lg:flex lg:justify-center lg:items-center xs:flex xs:flex-rows xs:gap-2">
+          {/* boutons qui serviront à filtrer grâce à un data */}
           {/* ------------------------------ */}
           {/* Income */}
+          <div className="flex xs:flex-col lg:flex-row justify-start items-start gap-2">
           <button
             className="bg-green-500 text-white px-3 py-2 rounded-md mr-3"
             onClick={filterData}
@@ -113,8 +118,10 @@ export default function TransactionsScreen({ setDisplayAll }) {
           >
             Others
           </button>
+          </div>
           {/* -------------------------- */}
           {/* Spend */}
+            <div className="flex xs:flex-col lg:flex-row justify-end items-end gap-2">
           <button
             className="bg-red-500 text-white px-3 py-2 rounded-md mr-3"
             onClick={filterData}
@@ -150,12 +157,14 @@ export default function TransactionsScreen({ setDisplayAll }) {
           >
             Others
           </button>
+          </div>
+        </div>
         </section>
         {!mobile ? (
-          <section className="bg-opacity-25 bg-white">
-            <table className="border-collapse border w-full">
+          <section className="bg-opacity-25 bg-white rounded-xl p-5 mt-5">
+            <table className="border-collapse border w-full text-white">
               <thead>
-                <tr className="bg-gray-200">
+                <tr className="bg-gray-500">
                   <th className="border p-2">In/out</th>
                   <th className="border p-2">ID</th>
                   <th className="border p-2">Category</th>
@@ -169,7 +178,7 @@ export default function TransactionsScreen({ setDisplayAll }) {
                   let pillColor =
                     item.type === "credit" ? "bg-green-600" : "bg-red-600";
                   pillColor +=
-                    " px-2 rounded-xl mr-9 flex justify-center items-center";
+                    "  rounded-xl flex justify-center items-center m-1";
 
                   let date = new Date(item.date);
                   let day = date.getDate();
@@ -179,16 +188,16 @@ export default function TransactionsScreen({ setDisplayAll }) {
 
                   return (
                     <tr key={item.id_transaction}>
-                      <td className="border p-2">
+                      <td className="border">
                         <div className={pillColor}>
                           <p className="">{item.type}</p>
                         </div>
                       </td>
-                      <td className="border p-2">{item.id_transaction}</td>
-                      <td className="border p-2">{item.name}</td>
-                      <td className="border p-2">{item.title}</td>
-                      <td className="border p-2">{item.amount} €</td>
-                      <td className="border p-2">{dateTransaction}</td>
+                      <td className="border text-end pr-2">{item.id_transaction}</td>
+                      <td className="border text-end pr-2">{item.name}</td>
+                      <td className="border text-end pr-2">{item.title}</td>
+                      <td className="border text-end pr-2">{item.amount} €</td>
+                      <td className="border text-end pr-2">{dateTransaction}</td>
                     </tr>
                   );
                 })}
@@ -196,9 +205,14 @@ export default function TransactionsScreen({ setDisplayAll }) {
             </table>
           </section>
         ) : (
+            <>
+            <div className="h-full bg-[#181E5A]">
           <TransactionList isMobile={mobile} filteredData={filteredData} />
+            </div>
+          <Footer />
+          </>
         )}
-      </>
+      </div>
     );
   }
 }
