@@ -114,7 +114,7 @@ export default function SpendDonut({ totalSpend, setTotalSpend }) {
                 soldeLabels.autres,
               ],
               backgroundColor: ["#7B0828", "#00A878", "#FFC759", "#79ADDC"],
-              hoverOffset: 30,
+              hoverOffset: 1,
             },
           ],
         },

@@ -17,6 +17,12 @@ export default function Form({ options, type }) {
     date: "",
     form: "",
   });
+  const [nextDay, setNextDay] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [maxDay, setMaxDay] = useState(
+    new Date(nextDay).setDate(new Date(nextDay).getDate() + 1)
+  );
 
   const [change, setChange] = useState(false);
 
@@ -144,6 +150,7 @@ export default function Form({ options, type }) {
         type="text"
         name="title"
         required
+        maxLength={20}
         onChange={(e) => checkEmpty(e)}
         onBlur={(e) => checkEmpty(e)}
       />
@@ -155,7 +162,10 @@ export default function Form({ options, type }) {
         className="block w-full rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 mb-2"
         type="date"
         name="date"
-        max={new Date().toISOString().split("T")[0]}
+        // value={}
+        min={"2023-01-01"}
+        //max = lendemain
+        max={new Date(maxDay).toISOString().split("T")[0]}
         onChange={(e) => checkEmpty(e)}
         onBlur={(e) => checkEmpty(e)}
         required

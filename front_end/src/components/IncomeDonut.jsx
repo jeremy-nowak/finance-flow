@@ -112,7 +112,7 @@ export default function IncomeDonut({ totalIncome, setTotalIncome }) {
                 soldeLabels.other,
               ],
               backgroundColor: ["#00A878", "#7B0828", "#FFC759", "#79ADDC"],
-              hoverOffset: 30,
+              hoverOffset: 1,
             },
           ],
         },
