@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="flex justify-evenly  bg-[#181E5A] py-5">
                 <button><img src='/home.svg' alt="home" /></button>
                 <ButtonAdd/>
-                <button><img src='transfert.svg' alt="transfert" /></button>
+                <button><img src='transfert-footer.svg' alt="transfert" /></button>
             </div>
         </footer>
     );

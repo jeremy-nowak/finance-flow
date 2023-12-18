@@ -92,9 +92,9 @@ export default function HomeScreen() {
                     />
                   </div>
                 </div>
+              <CellContainer />
               </div>
 
-              <CellContainer />
 
               <div className="bg-white bg-opacity-25 rounded-xl lg:mr-5 lg:mt-10 xs:my-5 p-5 flex justify-center w-full">
                 <div className="lg:w-3/4 xs:w-full">

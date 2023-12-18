@@ -79,16 +79,28 @@ function CellContainer() {
     getTotalPerCateg();
   }, [monthlyData]);
 
-  useEffect(() => {
-    console.log(income);
-    console.log(spend);
-  }, [income, spend]);
 
   return (
-    <div className="flex flex-col lg:flex-row xs:flex-col justify-around">
+    <div className="flex flex-row justify-around">
       <div className="lg:w-1/3 xs:w-full flex flex-col items-center py-2">
-        <div className="flex flex-col items-center">
-          <p className="text-white text-xl">Income</p>
+        <div className="grid grid-cols-2">
+          {
+            // spend
+            Object.keys(spend).map((item) => {
+              return (
+                <Cell
+                  key={item}
+                  name={item}
+                  amount={spend[item]}
+                  type="spend"
+                />
+              );
+            })
+          }
+        </div>
+      </div>
+      <div className="lg:w-1/3 xs:w-full flex flex-col items-center py-2">
+      <div className="grid grid-cols-2">
           {
             // income
             Object.keys(income).map((item) => {
@@ -105,24 +117,6 @@ function CellContainer() {
         </div>
       </div>
 
-      <div className="lg:w-1/3 xs:w-full flex flex-col items-center py-2">
-        <div className="flex flex-col items-center">
-          <p className="text-white text-xl">Spend</p>
-          {
-            // spend
-            Object.keys(spend).map((item) => {
-              return (
-                <Cell
-                  key={item}
-                  name={item}
-                  amount={spend[item]}
-                  type="spend"
-                />
-              );
-            })
-          }
-        </div>
-      </div>
     </div>
   );
 }
