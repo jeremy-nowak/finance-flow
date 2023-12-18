@@ -81,7 +81,7 @@ function CellContainer() {
 
 
   return (
-    <div className="flex flex-row justify-around">
+    <div className="lg:flex md:hidden sm:hidden xs:hidden flex-row justify-around">
       <div className="lg:w-1/3 xs:w-full flex flex-col items-center py-2">
         <div className="grid grid-cols-2">
           {
