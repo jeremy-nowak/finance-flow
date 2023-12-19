@@ -5,7 +5,7 @@ function Cell({ type, name, amount }) {
   // name: category name
   // amount: total amount for this category
 
-  const src = "/" + name + ".svg";
+  const src = name + ".svg";
 
   return (
     <div className="text-white flex flex-row bg-white bg-opacity-5 m-5 rounded-xl justify-between">

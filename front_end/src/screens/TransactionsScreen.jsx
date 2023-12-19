@@ -58,7 +58,7 @@ export default function TransactionsScreen({ setDisplayAll }) {
   if (isLoading) {
     return (
       <>
-        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="/back.svg" /></button>
+        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="back.svg" /></button>
         <h1>Transactions</h1>
         <h3>Loading...</h3>
       </>
@@ -66,7 +66,7 @@ export default function TransactionsScreen({ setDisplayAll }) {
   } else {
     return (
       <div className="h-screen">
-        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="/back.svg" /></button>
+        <button className="m-5" onClick={() => setDisplayAll(false)}><img src="back.svg" /></button>
         <h1 className="text-white text-bold text-3xl m-5">Transactions</h1>
         <section className="flex flex-col justify-center items-center">
             <div>

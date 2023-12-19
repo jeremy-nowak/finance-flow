@@ -9,6 +9,6 @@ export default function ButtonAdd() {
     return (
             <button onClick={()=>{
                 setDisplayForm(true)
-            }}><img src='/plus-circle.svg' alt="plus" /></button>
+            }}><img src='plus-circle.svg' alt="plus" /></button>
     );
 }

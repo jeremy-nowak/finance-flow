@@ -12,7 +12,7 @@ const Footer = () => {
         <footer className='lg:hidden sticky bottom-0 h-[10%]'>
             {displayForm && <FormScreen />}
             <div className="flex justify-evenly  bg-[#181E5A] py-5">
-                <button><img src='/home.svg' alt="home" /></button>
+                <button><img src='home.svg' alt="home" /></button>
                 <ButtonAdd/>
                 <button><img src='transfert-footer.svg' alt="transfert" /></button>
             </div>
